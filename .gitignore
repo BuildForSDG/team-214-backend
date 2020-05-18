@@ -1,9 +1,11 @@
 # FILES
 **/**/.pyc
 .DS_Store
+.env
 
 # DIRECTORIES
 **/**/__pycache__
 .vscode/
 .pytest_cache
-src.egg-info
+migrations
+sme_financing.egg-info

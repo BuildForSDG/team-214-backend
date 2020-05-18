@@ -5,7 +5,7 @@ A one-liner phrase describing this project or app
 
 ## About
 
-What is this project about. Ok to enrich here or the section above it with an image. 
+What is this project about. Ok to enrich here or the section above it with an image.
 
 Once this repo has been setup on Codacy by the TTL, replace the above badge with the actual one from the Codacy dashboard, and add the code coverage badge as well. This is mandatory
 
@@ -26,7 +26,7 @@ How would someone use what you have built, include URLs to the deployed app, ser
 
 
 ## Setup
-You should have **Python 3.5+** and **git** installed. 
+You should have **Python 3.5+** and **git** installed.
 
 1. Clone the repo you've created from the template herein and change into the directory
 
@@ -80,15 +80,15 @@ You should have **Python 3.5+** and **git** installed.
     This will install pytest for running tests and flake8, linter for your project.
 
 #### To Note
-`src/app.py` is the entry to the project and source code should go into the `src` folder.
+`sme_financing/app.py` is the entry to the project and source code should go into the `sme_financing` folder.
 
-All tests should be written in the `tests` folder. tests/test_src.py is a sample test file that shows how tests should like. Feel free to delete it.
+All tests should be written in the `tests` folder. tests/test_sme_financing.py is a sample test file that shows how tests should like. Feel free to delete it.
 
 #### Hints
 
 - Lint: `poetry run flake8`
 - Run tests using the command: `poetry run pytest`
-- Install dependencies: 
+- Install dependencies:
   `poetry add <dependency>`
 - Install dev dependencies:
   `poetry add --dev <dev-dependency>`
