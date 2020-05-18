@@ -1,1 +1,1 @@
-"""Sme financing package.."""
+"""Sme financing package."""

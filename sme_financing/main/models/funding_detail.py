@@ -4,7 +4,7 @@ from .. import db
 
 
 class FundingDetail(db.Model):
-    """ FundingDetail Model for storing FundingDetail related details ."""
+    """FundingDetail Model for storing FundingDetail related details."""
 
     __tablename__ = "funding_details"
 

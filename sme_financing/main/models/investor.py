@@ -4,7 +4,7 @@ from .. import db
 
 
 class Investor(db.Model):
-    """ Investor Model for storing Investor related details ."""
+    """Investor Model for storing Investor related details."""
 
     __tablename__ = "investors"
 

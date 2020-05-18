@@ -4,7 +4,7 @@ from .. import db
 
 
 class SME(db.Model):
-    """ SME Model for storing SME related details ."""
+    """SME Model for storing SME related details."""
 
     __tablename__ = "smes"
 

@@ -4,7 +4,7 @@ from .. import db
 
 
 class FundingCriteria(db.Model):
-    """ FundingCriteria Model for storing FundingCriteria related details ."""
+    """FundingCriteria Model for storing FundingCriteria related details."""
 
     __tablename__ = "funding_criteria"
 

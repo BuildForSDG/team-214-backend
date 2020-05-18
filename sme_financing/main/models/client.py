@@ -12,7 +12,7 @@ class EducationLevel(Enum):
 
 
 class Client(db.Model):
-    """ Client Model for storing client related details ."""
+    """Client Model for storing client related details."""
 
     __tablename__ = "clients"
 

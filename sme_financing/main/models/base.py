@@ -3,7 +3,7 @@
 # from .. import db, flask_bcrypt
 
 # class Base():
-#     """ Base Model for other models ."""
+# """Base Model for other models."""
 #     pass
 #     __abstract__ = True
 #     id =  Column(Integer, primary_key=True)

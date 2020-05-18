@@ -1,4 +1,4 @@
-""" Application entry point ."""
+"""Application entry point."""
 
 import os
 import unittest
@@ -37,7 +37,7 @@ manager.add_command("db", MigrateCommand)
 
 @manager.command
 def run():
-    """Runs app from the command line.."""
+    """Runs app from the command line."""
     print("run command!!!!!!!!!!!!!!!!!!!!")
     app.run()
     print("exit run command!!!!!!!!!!!!!!!!!!!!")
@@ -45,7 +45,7 @@ def run():
 
 @manager.command
 def test():
-    """Runs the unit tests.."""
+    """Runs the unit tests."""
     tests = unittest.TestLoader().discover("tests", pattern="test*.py")
     result = unittest.TextTestRunner(verbosity=2).run(tests)
     if result.wasSuccessful():

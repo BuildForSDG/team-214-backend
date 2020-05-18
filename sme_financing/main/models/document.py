@@ -4,7 +4,7 @@ from .. import db
 
 
 class Document(db.Model):
-    """ Document Model for storing Document related details ."""
+    """Document Model for storing Document related details."""
 
     __tablename__ = "documents"
 

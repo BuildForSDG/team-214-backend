@@ -1,12 +1,12 @@
 # SME financing platform (APIs)
 
-[![Codacy Badge](https://img.shields.io/badge/Code%20Quality-D-red)](https://img.shields.io/badge/Code%20Quality-D-red)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/f651b5fea9e743719dfd1f7f3578b616)](https://www.codacy.com/gh/BuildForSDG/team-214-backend?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=BuildForSDG/team-214-backend&amp;utm_campaign=Badge_Grade)
 
 ## About
 
 We are building an SME financing platform solution that would help small and medium entreprises gain access to financial services and manage, track and ensure the effective implementation the financing project. This repo contains the backend part (APIs) of the project. The fontend is [here](https://github.com/BuildForSDG/.team-214).
 
-![API docs](api_docs.png)
+![API docs UI](api_docs.png)
 
 <!-- Once this repo has been setup on Codacy by the TTL, replace the above badge with the actual one from the Codacy dashboard, and add the code coverage badge as well. This is mandatory -->
 
@@ -30,21 +30,21 @@ How would someone use what you have built, include URLs to the deployed app, ser
 
 You should have **Python 3.7+** and **git** installed.
 
-1. Clone the repo
+### 1. Clone the repo
 
 ```sh
 git clone https://github.com/BuildForSDG/team-214-backend.git
 ```
 
-&nbsp;
-2. Change into repo directory
+### 2. Change into repo directory
 
 ```sh
 cd team-214-backend
 ```
 
-&nbsp;
-3. Install poetry, a dependecy manager for python.
+### 3. Install poetry
+
+Poetry is a dependecy manager for python.
 
 On windows, you will need powershell to install it:
 
@@ -72,8 +72,9 @@ May be the latest stable version is not installed with the installation script, 
 poetry self update
 ```
 
-&nbsp;
-4. With poetry installed, you should install project dependecies by running:
+### 4. Install project dependecies
+
+With poetry installed, you should install project dependecies by running
 
 ```sh
 poetry install
@@ -81,21 +82,23 @@ poetry install
 
 This will install all the dependencies found in `pyproject.toml`, that includes pytest for running tests and flake8, linter for the project.
 
-&nbsp;
-5. With the dependencies installed, you can start the project by running:
+### 5. Start the project
+
+With the dependencies installed, you can start the project by running:
 
 ```sh
 python manage.py run
 ```
 
-### Additional commands
+## Additional commands
 
 - Lint: `poetry run flake8`
+
 - Run tests using the command: `poetry run pytest`
-- Install dependencies:
-  `poetry add <dependency>`
-- Install dev dependencies:
-  `poetry add --dev <dev-dependency>`
+
+- Install dependencies: `poetry add <dependency>`
+
+- Install dev dependencies: `poetry add --dev <dev-dependency>`
 
 ## Authors
 
@@ -104,21 +107,23 @@ List the team behind this project. Their names linked to their Github, LinkedIn,
 ## Contributing
 
 If this project sounds interesting to you and you'd like to contribute, thank you!
-First, you can send a mail to buildforsdg@andela.com to indicate your interest, why you'd like to support and what forms of support you can bring to the table, but here are areas we think we'd need the most help in this project :
+First, you can send a mail to buildforsdg@andela.com to indicate your interest, why you'd like to support and what forms of support you can bring to the table.
 
-1. area one (e.g this app is about human trafficking and you need feedback on your roadmap and feature list from the private sector / NGOs)
+<!-- but here are areas we think we'd need the most help in this project : -->
+
+<!-- 1. area one (e.g this app is about human trafficking and you need feedback on your roadmap and feature list from the private sector / NGOs)
 
 2. area two (e.g you want people to opt-in and try using your staging app at staging.project-name.com and report any bugs via a form)
 
-3. area three (e.g here is the zoom link to our end-of sprint webinar, join and provide feedback as a stakeholder if you can)
+3. area three (e.g here is the zoom link to our end-of sprint webinar, join and provide feedback as a stakeholder if you can) -->
 
-## Acknowledgements
+<!-- ## Acknowledgements
 
 Did you use someone else’s code?
 Do you want to thank someone explicitly?
 Did someone’s blog post spark off a wonderful idea or give you a solution to nagging problem?
 
-It's powerful to always give credit.
+It's powerful to always give credit. -->
 
 ## LICENSE
 

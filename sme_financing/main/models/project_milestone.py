@@ -4,7 +4,7 @@ from .. import db
 
 
 class ProjectMilestone(db.Model):
-    """ ProjectMilestone Model for storing ProjectMilestone related details."""
+    """ProjectMilestone Model for storing ProjectMilestone related details."""
 
     __tablename__ = "project_milestones"
 

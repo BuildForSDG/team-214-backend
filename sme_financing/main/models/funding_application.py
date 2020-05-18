@@ -12,7 +12,7 @@ funding_application_investors = db.Table(
 
 
 class FundingApplication(db.Model):
-    """ FundingApplication Model for storing FundingApplication related details ."""
+    """FundingApplication Model for storing FundingApplication related details."""
 
     __tablename__ = "funding_applications"
 
