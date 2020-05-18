@@ -61,7 +61,7 @@ jobs:
     - name: Lint with Black
       run: |
         black --version
-        poetry run black --check .
+        black --check .
     - name: Run Tests
       run: |
-        poetry run pytest --disable-warnings
+        pytest --disable-warnings

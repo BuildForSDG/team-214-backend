@@ -14,14 +14,13 @@ init-db:
 all-db: init-db upgrade-db
 
 tests:
-	python manage.py test
+	poetry run pytest --disable-warnings
 
 run:
 	python manage.py run
 
 sort-import:
-	poetry isort -rc .
+	poetry run isort -rc .
 
 format:
 	poetry run black .
-
