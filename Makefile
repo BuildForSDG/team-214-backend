@@ -18,3 +18,10 @@ tests:
 
 run:
 	python manage.py run
+
+sort-import:
+	poetry isort -rc .
+
+format:
+	poetry run black .
+

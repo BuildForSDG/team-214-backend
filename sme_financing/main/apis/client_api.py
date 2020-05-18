@@ -1,12 +1,8 @@
 from flask import request
 from flask_restx import Resource
 
+from ..service.client_service import get_all_clients, get_client_by_email, save_client
 from .dto import ClientDTO
-from ..service.client_service import (
-    get_all_clients,
-    get_client_by_email,
-    save_client,
-)
 
 api = ClientDTO.client_api
 _client = ClientDTO.client
@@ -42,6 +38,7 @@ class ClientList(Resource):
 #             api.abort(404)
 #         else:
 #             return client
+
 
 @api.route("/<email>")
 @api.param("email", "The client email")

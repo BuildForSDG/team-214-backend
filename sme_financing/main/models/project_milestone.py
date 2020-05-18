@@ -1,5 +1,7 @@
 from datetime import datetime
+
 from .. import db, flask_bcrypt
+
 
 class ProjectMilestone(db.Model):
     """ ProjectMilestone Model for storing ProjectMilestone related details"""

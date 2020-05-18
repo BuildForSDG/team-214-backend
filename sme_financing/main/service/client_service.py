@@ -54,5 +54,6 @@ def get_client_by_user_id(user_id):
 def get_client_by_email(email):
     return Client.query.filter(Client.user.has(email=email)).first()
 
+
 # def get_client_by_email(email):
 #     return Client.query.join(Client.user, aliased=True).filter_by(email=email).first()

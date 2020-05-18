@@ -1,8 +1,8 @@
 from flask import request
 from flask_restx import Resource
 
-from .dto import UserDTO
 from ..service.user_service import get_all_users, get_user_by_public_id, save_user
+from .dto import UserDTO
 
 api = UserDTO.user_api
 _user = UserDTO.user

@@ -50,6 +50,6 @@ class ClientDTO:
             "position": fields.String(
                 required=True, description="Client position in the SME"
             ),
-            'user': fields.Nested(UserDTO().user),
+            "user": fields.Nested(UserDTO().user),
         },
     )

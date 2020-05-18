@@ -1,11 +1,13 @@
 import os
+
 from dotenv import load_dotenv
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-env_path = os.path.join(basedir, '../../.env')
+env_path = os.path.join(basedir, "../../.env")
 load_dotenv(dotenv_path=env_path)
 print(env_path)
+
 
 class Config(object):
     DEBUG = True
