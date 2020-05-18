@@ -4,7 +4,7 @@ from .. import db
 
 
 class SME(db.Model):
-    """ SME Model for storing SME related details """
+    """ SME Model for storing SME related details ."""
 
     __tablename__ = "smes"
 
@@ -32,4 +32,5 @@ class SME(db.Model):
     updated = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     def __repr__(self):
+        """Returns this class representation."""
         return f"<SME {self.name}>"

@@ -58,10 +58,14 @@ jobs:
       run: |
         isort --version-number
         isort -rc --check-only --quiet .
-    - name: Lint with Black
+    - name: Lint with flake8
       run: |
-        black --version
-        black --check .
+        flake8 --version
+        flake8
+    # - name: Lint with Black
+    #   run: |
+    #     black --version
+    #     black --check .
     - name: Run Tests
       run: |
         pytest --disable-warnings

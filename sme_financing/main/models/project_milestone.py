@@ -1,10 +1,10 @@
 from datetime import datetime
 
-from .. import db, flask_bcrypt
+from .. import db
 
 
 class ProjectMilestone(db.Model):
-    """ ProjectMilestone Model for storing ProjectMilestone related details"""
+    """ ProjectMilestone Model for storing ProjectMilestone related details."""
 
     __tablename__ = "project_milestones"
 
@@ -21,4 +21,5 @@ class ProjectMilestone(db.Model):
     updated = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     def __repr__(self):
+        """Returns this class representation."""
         return f"<ProjectMilestone '{self.start} - {self.status}'>"

@@ -12,7 +12,7 @@ class EducationLevel(Enum):
 
 
 class Client(db.Model):
-    """ Client Model for storing client related details """
+    """ Client Model for storing client related details ."""
 
     __tablename__ = "clients"
 
@@ -40,4 +40,5 @@ class Client(db.Model):
     updated = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     def __repr__(self):
+        """Returns this class representation."""
         return f"<Client '{self.lastname} {self.firstname}'>"

@@ -1,5 +1,6 @@
 [flake8]
-per-file-ignores = */manage.py: F401
+per-file-ignores = manage.py: F401
+max-line-length=88
 
 exclude =
   .pytest_cache
@@ -18,5 +19,6 @@ exclude =
   .github
   tests/fixtures/
   tests/utils/fixtures/
+  migrations
 
 max-complexity = 10

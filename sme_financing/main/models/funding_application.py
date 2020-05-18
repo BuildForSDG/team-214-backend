@@ -12,7 +12,7 @@ funding_application_investors = db.Table(
 
 
 class FundingApplication(db.Model):
-    """ FundingApplication Model for storing FundingApplication related details """
+    """ FundingApplication Model for storing FundingApplication related details ."""
 
     __tablename__ = "funding_applications"
 
@@ -34,4 +34,5 @@ class FundingApplication(db.Model):
     updated = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     def __repr__(self):
+        """Returns this class representation."""
         return f"<FundingApplication '{self.name} - {self.status}'>"

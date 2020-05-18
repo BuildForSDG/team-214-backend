@@ -4,7 +4,7 @@ from .. import db
 
 
 class Document(db.Model):
-    """ Document Model for storing Document related details """
+    """ Document Model for storing Document related details ."""
 
     __tablename__ = "documents"
 
@@ -24,4 +24,5 @@ class Document(db.Model):
     updated = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     def __repr__(self):
+        """Returns this class representation."""
         return f"<Document '{self.name}'>"

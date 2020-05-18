@@ -4,7 +4,7 @@ from .. import db
 
 
 class Investor(db.Model):
-    """ Investor Model for storing Investor related details """
+    """ Investor Model for storing Investor related details ."""
 
     __tablename__ = "investors"
 
@@ -28,4 +28,5 @@ class Investor(db.Model):
     updated = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     def __repr__(self):
+        """Returns this class representation."""
         return f"<Investor '{self.name} - {self.type_of_investor}'>"

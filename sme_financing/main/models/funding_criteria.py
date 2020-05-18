@@ -4,7 +4,7 @@ from .. import db
 
 
 class FundingCriteria(db.Model):
-    """ FundingCriteria Model for storing FundingCriteria related details """
+    """ FundingCriteria Model for storing FundingCriteria related details ."""
 
     __tablename__ = "funding_criteria"
 
@@ -19,4 +19,5 @@ class FundingCriteria(db.Model):
     updated = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     def __repr__(self):
+        """Returns this class representation."""
         return f"<FundingCriteria '{self.name}'>"

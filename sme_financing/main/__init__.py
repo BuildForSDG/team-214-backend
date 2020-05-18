@@ -1,4 +1,4 @@
-""" app factory file """
+"""App factory file."""
 
 # from werkzeug.contrib.fixers import ProxyFix
 from flask import Flask
@@ -12,7 +12,7 @@ flask_bcrypt = Bcrypt()
 
 
 def create_app(config_name):
-    """ application factory """
+    """ Application factory ."""
     app = Flask(__name__)
     # app.wsgi_app = ProxyFix(app.wsgi_app)
     app.config.from_object(config[config_name])

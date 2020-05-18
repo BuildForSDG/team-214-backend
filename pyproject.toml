@@ -66,6 +66,7 @@ exclude = '''
   .github
   tests/fixtures/
   tests/utils/fixtures/
+  migrations
   .env
   venv
 '''

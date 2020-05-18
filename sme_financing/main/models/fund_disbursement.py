@@ -4,7 +4,7 @@ from .. import db
 
 
 class FundDisbursement(db.Model):
-    """ FundingProject Model for storing  FundingProject related details """
+    """ FundingProject Model for storing  FundingProject related details ."""
 
     __tablename__ = "fund_disbursements"
 
@@ -23,4 +23,5 @@ class FundDisbursement(db.Model):
     updated = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     def __repr__(self):
+        """Returns this class representation."""
         return f"<FundDisbursement '{self.disbursement_date} - {self.status}'>"

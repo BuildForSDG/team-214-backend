@@ -4,7 +4,7 @@ from .. import db, flask_bcrypt
 
 
 class User(db.Model):
-    """ User Model for storing user related details """
+    """ User Model for storing user related details ."""
 
     __tablename__ = "users"
 
@@ -37,4 +37,5 @@ class User(db.Model):
         return flask_bcrypt.check_password_hash(self.password_hash, password)
 
     def __repr__(self):
+        """Returns this class representation."""
         return f"<User '{self.username}'>"

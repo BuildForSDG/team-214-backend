@@ -14,14 +14,14 @@ class UserList(Resource):
     @api.doc("list of users")
     @api.marshal_list_with(_userList, envelope="data")
     def get(self):
-        """List all users"""
+        """List all users."""
         return get_all_users()
 
     @api.doc("create a new user")
     @api.expect(_user, validate=True)
     @api.response(201, "User successfully created")
     def post(self):
-        """Creates a new user"""
+        """Creates a new user."""
         data = request.json
         return save_user(data=data)
 
@@ -33,7 +33,7 @@ class User(Resource):
     @api.doc("get a user")
     @api.marshal_with(_user)
     def get(self, public_id):
-        """get a user given its public_id"""
+        """Get a user given its public_id."""
         user = get_user_by_public_id(public_id)
         if not user:
             api.abort(404)
