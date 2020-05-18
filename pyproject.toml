@@ -1,21 +1,85 @@
 [tool.poetry]
-name = "src"
+name = "sme_financing"
 version = "0.1.0"
-description = ""
+description = "An SME financing platform solution that would help small and medium entreprises gain access to financial services and manage, track and ensure the effective implementation the financing project."
 authors = [
-    "Authors Here"
+    "kakiang <kakiang.hk@gmail.com>"
 ]
 
 [tool.poetry.dependencies]
 python = "^3.7"
+Flask = "^1.1.2"
+Flask-SQLAlchemy = "^2.4.1"
+Flask-Migrate = "^2.5.3"
+Flask-Bcrypt = "^0.7.1"
+Flask-Script = "^2.0.6"
+flask_testing = "^0.8.0"
+pyjwt = "^1.7.1"
+flask-restx = "^0.2.0"
+python-dotenv = "^0.13.0"
+pymysql = "^0.9.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
 flake8 = "^3.7.9"
+black = "^19.10b0"
+isort = "^4.3.21"
+pytest-cov = "^2.8.1"
+
+[tool.black]
+line-length = 88
+target-version = ['py37']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.flake8]
+max-line-length = 88
+ignore = ['E501']
+max-complexity = 10
+exclude = '''
+  .pytest_cache
+  .DS_Store
+  __pycache__
+  **/**/__pycache__
+  *.pyc
+  .git
+  setup.py
+  build
+  dist
+  releases
+  .venv
+  .tox
+  .vscode
+  .github
+  tests/fixtures/
+  tests/utils/fixtures/
+  .env
+  venv
+'''
+
+[tool.isort]
+line_length=88
+multi_line_output = 3
+include_trailing_comma = true
+include_trailing_space = true
+indent = '    '
+
+[tool.poetry.scripts]
+startapp = "manage:run"
 
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
-
-[tool.poetry.scripts]
-app = 'src.app:run'

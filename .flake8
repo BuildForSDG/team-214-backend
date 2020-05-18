@@ -1,4 +1,5 @@
 [flake8]
+per-file-ignores = */manage.py: F401
 
 exclude =
   .pytest_cache
