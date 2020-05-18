@@ -1,5 +1,6 @@
 A one-liner phrase describing this project or app
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7525c4855c574c86b72bbbadb8a4b769)](https://app.codacy.com/gh/BuildForSDG/team-214-backend?utm_source=github.com&utm_medium=referral&utm_content=BuildForSDG/team-214-backend&utm_campaign=Badge_Grade_Dashboard)
 [![Codacy Badge](https://img.shields.io/badge/Code%20Quality-D-red)](https://img.shields.io/badge/Code%20Quality-D-red)
 
 
