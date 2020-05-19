@@ -38,9 +38,13 @@ manager.add_command("db", MigrateCommand)
 @manager.command
 def run():
     """Runs app from the command line."""
-    print("run command!!!!!!!!!!!!!!!!!!!!")
     app.run()
-    print("exit run command!!!!!!!!!!!!!!!!!!!!")
+
+
+@manager.command
+def run_container():
+    """Runs app on port PORT from the command line."""
+    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
 
 
 @manager.command

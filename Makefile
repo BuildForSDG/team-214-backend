@@ -19,6 +19,9 @@ tests:
 run:
 	python manage.py run
 
+run-container:
+	python manage.py run_container
+
 sort-import:
 	poetry run isort -rc .
 

@@ -1,0 +1,18 @@
+# FILES
+**/**/.pyc
+.DS_Store
+.env
+
+# DIRECTORIES
+**/**/__pycache__
+.vscode/
+.pytest_cache
+migrations
+sme_financing.egg-info
+
+Dockerfile
+README.md
+*.pyc
+*.pyo
+*.pyd
+__pycache__
