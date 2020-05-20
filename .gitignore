@@ -8,4 +8,5 @@
 .vscode/
 .pytest_cache
 migrations
+*.db
 sme_financing.egg-info

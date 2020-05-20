@@ -22,9 +22,6 @@ RUN /bin/bash -c "source .poetry/env"
 RUN poetry export -f requirements.txt -o requirements.txt
 
 RUN pip install -r requirements.txt
-RUN pip install Werkzeug
-RUN make all-db
-# CMD make run-container
-
 RUN pip install gunicorn
-CMD gunicorn -b 0.0.0.0:$PORT manage:app
+
+CMD gunicorn -b 0.0.0.0:$PORT --workers 1 --threads 8 manage:app

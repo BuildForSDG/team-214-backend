@@ -45,7 +45,9 @@ class ClientDTO:
                 required=True, description="Client nationality"
             ),
             "education_level": fields.String(
-                required=True, description="Client education level"
+                required=True,
+                description="""Client education level.
+                [Doctorate Degree, Masters Degree, Bachelors Degree, HND]""",
             ),
             "position": fields.String(
                 required=True, description="Client position in the SME"
