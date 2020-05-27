@@ -46,10 +46,10 @@ def run():
     app.run()
 
 
-@manager.command
-def run_container():
-    """Runs app on port PORT from the command line."""
-    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+# @manager.command
+# def run_container():
+#     """Runs app on port PORT from the command line."""
+#     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
 
 
 @manager.command

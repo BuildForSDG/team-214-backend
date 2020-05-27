@@ -48,7 +48,7 @@ def get_all_clients():
 
 
 def get_client_by_user_id(user_id):
-    return Client.query_filter_by(user_id=user_id).first()
+    return Client.query.filter_by(user_id=user_id).first()
 
 
 def get_client_by_email(email):

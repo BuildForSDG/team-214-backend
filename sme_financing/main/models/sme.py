@@ -25,7 +25,8 @@ class SME(db.Model):
     employees_number = db.Column(db.Integer, nullable=False)
 
     client_id = db.Column(db.Integer, db.ForeignKey("clients.id"))
-    # documents = db.relationship("Document", backref="sme")
+    # client = db.relationship("Client", backref="smes")
+    documents = db.relationship("Document", backref="sme")
     # funding_applications = db.relationship("FundingApplication", backref="sme")
 
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)

@@ -17,7 +17,7 @@ class FundDisbursement(db.Model):
     cheque_details = db.Column(db.String(255), nullable=True)
 
     funding_project_id = db.Column(db.Integer, db.ForeignKey("funding_projects.id"))
-    funding_project = db.relationship("FundingProject", backref="funding_disbursements")
+    # funding_project=db.relationship("FundingProject",backref="funding_disbursements")
 
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated = db.Column(db.DateTime, onupdate=datetime.utcnow)

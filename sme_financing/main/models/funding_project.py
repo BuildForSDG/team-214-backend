@@ -13,22 +13,22 @@ class FundingProject(db.Model):
     description = db.Column(db.String(255), nullable=False)
     status = db.Column(db.String(50), nullable=False)
 
-    start = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    end = db.Column(db.DateTime, nullable=True)
+    start_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    end_date = db.Column(db.DateTime, nullable=True)
 
     funding_application_id = db.Column(
         db.Integer, db.ForeignKey("funding_applications.id")
     )
-    funding_application = db.relationship(
-        "FundingApplication", backref="funding_projects"
-    )
+    # funding_application = db.relationship(
+    #     "FundingApplication", backref="funding_projects"
+    # )
 
     investor_id = db.Column(db.Integer, db.ForeignKey("investors.id"))
-    investor = db.relationship("Investor", backref="funding_projects")
+    # investor = db.relationship("Investor", backref="funding_projects")
 
-    # funding_details = db.relationship("FundingDetail", backref="funding_project")
-    # fund_disbursements = db.relationship("FundDisbursement",backref="funding_project")
-    # project_milestones = db.relationship("ProjectMilestone",backref="funding_project")
+    funding_details = db.relationship("FundingDetail", backref="funding_project")
+    fund_disbursements = db.relationship("FundDisbursement", backref="funding_project")
+    project_milestones = db.relationship("ProjectMilestone", backref="funding_project")
 
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated = db.Column(db.DateTime, onupdate=datetime.utcnow)

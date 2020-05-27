@@ -19,11 +19,11 @@ tests:
 run:
 	python manage.py run
 
-run-container:
-	python manage.py run_container
+lint:
+	poetry run flake8 . --count --show-source --statistics
 
 sort-import:
 	poetry run isort -rc .
 
-format:
+fmt:
 	poetry run black .

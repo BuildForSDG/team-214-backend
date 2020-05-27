@@ -13,7 +13,7 @@ class FundingCriteria(db.Model):
     description = db.Column(db.String(255), nullable=False)
 
     investor_id = db.Column(db.Integer, db.ForeignKey("investors.id"))
-    investor = db.relationship("Investor", backref="funding_criterion")
+    # investor = db.relationship("Investor", backref="funding_criterion")
 
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated = db.Column(db.DateTime, onupdate=datetime.utcnow)

@@ -12,11 +12,11 @@ We are building an SME financing platform solution that would help small and med
 
 This project uses:
 
-- poetry as a dependecy manager; configuration in pyproject.toml
+*   poetry as a dependecy manager; configuration in pyproject.toml
 
-- flake8: for linting
-- black: for formatting
-- pytest: for running tests
+*   flake8: for linting
+*   black: for formatting
+*   pytest: for running tests
 
 ## Why
 
@@ -92,13 +92,13 @@ python manage.py run
 
 ## Additional commands
 
-- Lint: `poetry run flake8`
+*   Lint: `poetry run flake8`
 
-- Run tests using the command: `poetry run pytest`
+*   Run tests using the command: `poetry run pytest`
 
-- Install dependencies: `poetry add <dependency>`
+*   Install dependencies: `poetry add <dependency>`
 
-- Install dev dependencies: `poetry add --dev <dev-dependency>`
+*   Install dev dependencies: `poetry add --dev <dev-dependency>`
 
 ## Authors
 

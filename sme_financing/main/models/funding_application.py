@@ -12,7 +12,7 @@ funding_application_investors = db.Table(
 
 
 class FundingApplication(db.Model):
-    """FundingApplication Model for storing FundingApplication related details."""
+    """FundingApplication Model for storing related details."""
 
     __tablename__ = "funding_applications"
 
@@ -28,7 +28,7 @@ class FundingApplication(db.Model):
         secondary=funding_application_investors,
         backref=db.backref("funding_applications"),
     )
-    # funding_projects = db.relationship("FundingProject",backref="funding_application")
+    funding_projects = db.relationship("FundingProject", backref="funding_application")
 
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated = db.Column(db.DateTime, onupdate=datetime.utcnow)

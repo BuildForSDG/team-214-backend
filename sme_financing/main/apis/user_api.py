@@ -1,3 +1,5 @@
+"""RESTful API User resource"""
+
 from flask import request
 from flask_restx import Resource
 
@@ -30,7 +32,7 @@ class UserList(Resource):
 @api.param("public_id", "The user identifier")
 @api.response(404, "User not found")
 class User(Resource):
-    @api.doc("get a user")
+    @api.doc("Get a user given its public_id")
     @api.marshal_with(_user)
     def get(self, public_id):
         """Get a user given its public_id."""

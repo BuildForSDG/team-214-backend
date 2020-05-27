@@ -55,3 +55,87 @@ class ClientDTO:
             "user": fields.Nested(UserDTO().user),
         },
     )
+
+
+class SMEDTO:
+    sme_api = Namespace("sme", description="SME related operations")
+    sme_list = sme_api.model(
+        "sme_list",
+        {
+            "name": fields.String(required=True, description="SME name"),
+            "postal_address": fields.String(
+                required=True, description="SME postal address"
+            ),
+            "location": fields.String(required=True, description="SME location"),
+            "telephone": fields.String(required=True, description="SME telephone"),
+            "email": fields.String(required=True, description="SME email address"),
+            "description": fields.String(required=True, description="SME description"),
+            "sector": fields.String(required=True, description="SME sector"),
+            "principal_product_service": fields.String(
+                required=True, description="SME principal product/service",
+            ),
+            "other_product_service": fields.String(
+                required=True, description="SME other products/services"
+            ),
+            "age": fields.String(required=True, description="SME age"),
+            "establishment_date": fields.Date(description="SME establishment date"),
+            "ownership_type": fields.String(
+                required=True, description="SME ownership type"
+            ),
+            "bank_account_details": fields.String(
+                required=True, description="SME bank account details"
+            ),
+            "employees_number": fields.Integer(
+                required=True, description="SME employees_number"
+            ),
+            "client": fields.Nested(
+                ClientDTO().client, description="SME representative"
+            ),
+        },
+    )
+
+    sme = sme_api.model(
+        "sme",
+        {
+            "name": fields.String(required=True, description="SME name"),
+            "postal_address": fields.String(
+                required=True, description="SME postal address"
+            ),
+            "location": fields.String(required=True, description="SME location"),
+            "telephone": fields.String(required=True, description="SME telephone"),
+            "email": fields.String(required=True, description="SME email address"),
+            "description": fields.String(required=True, description="SME description"),
+            "sector": fields.String(required=True, description="SME sector"),
+            "principal_product_service": fields.String(
+                required=True, description="SME principal product/service",
+            ),
+            "other_product_service": fields.String(
+                required=True, description="SME other products/services"
+            ),
+            "age": fields.String(required=True, description="SME age"),
+            "establishment_date": fields.Date(description="SME establishment date"),
+            "ownership_type": fields.String(
+                required=True, description="SME ownership type"
+            ),
+            "bank_account_details": fields.String(
+                required=True, description="SME bank account details"
+            ),
+            "employees_number": fields.Integer(
+                required=True, description="SME employees_number"
+            ),
+            "client_email": fields.String(required=True, description="Client email"),
+        },
+    )
+
+
+class DocumentDTO:
+    document_api = Namespace("document", description="Document related operations")
+    document = document_api.model(
+        "document",
+        {
+            "name": fields.String(required=False, description="Document name"),
+            "file_name": fields.String(required=False, description="File name"),
+            "file_type": fields.String(required=False, description="File type"),
+            "file_size": fields.String(description="File size. Max upload size=5MB"),
+        },
+    )

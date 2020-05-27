@@ -1,7 +1,14 @@
+"""RESTful API Client resource"""
+
 from flask import request
 from flask_restx import Resource
 
-from ..service.client_service import get_all_clients, get_client_by_email, save_client
+from ..service.client_service import (
+    get_all_clients,
+    get_client_by_email,
+    get_client_by_user_id,
+    save_client,
+)
 from .dto import ClientDTO
 
 api = ClientDTO.client_api
@@ -25,22 +32,22 @@ class ClientList(Resource):
         return save_client(data=data)
 
 
-# @api.route("/<user_id>")
-# @api.param("user_id", "The user id")
-# @api.response(404, "Client not found")
-# class Client(Resource):
-#     @api.doc("get a client based on its user_id")
-#     @api.marshal_with(_client)
-#     def get(self, user_id):
-#         """Get a client given its user_id."""
-#         client = get_client_by_user_id(user_id)
-#         if not client:
-#             api.abort(404)
-#         else:
-#             return client
+@api.route("/user/<user_id>")
+@api.param("user_id", "The user id")
+@api.response(404, "Client not found")
+class ClientUser(Resource):
+    @api.doc("get a client based on its user_id")
+    @api.marshal_with(_client)
+    def get(self, user_id):
+        """Get a client given its user_id."""
+        client = get_client_by_user_id(user_id)
+        if not client:
+            api.abort(404)
+        else:
+            return client
 
 
-@api.route("/<email>")
+@api.route("/email/<email>")
 @api.param("email", "The client email")
 @api.response(404, "Client not found")
 class Client(Resource):
