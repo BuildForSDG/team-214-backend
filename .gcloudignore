@@ -10,3 +10,9 @@
 migrations
 *.db
 sme_financing.egg-info
+
+README.md
+*.pyc
+*.pyo
+*.pyd
+__pycache__
