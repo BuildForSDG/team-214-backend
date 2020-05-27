@@ -78,8 +78,8 @@ def save_document(document_name, file):
         return response_object, 500
 
 
-def get_document(id):
-    return Document.query.filter_by(id=id).first()
+def get_document(doc_id):
+    return Document.query.filter_by(id=doc_id).first()
 
 
 def update():

@@ -1,4 +1,4 @@
-FROM gcr.io/google_appengine/python:latest
+FROM gcr.io/google_appengine/python:2020-03-29-162500
 
 # RUN apt-get update && apt-get install -y && apt-get install curl
 

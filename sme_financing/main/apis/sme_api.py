@@ -34,9 +34,6 @@ class SMEList(Resource):
 @api.param("sme_id", "The ID of the SME to process")
 @api.response(HTTPStatus.NOT_FOUND, "SME not found")
 class SMEByID(Resource):
-
-    """Show a single SME and lets you delete it."""
-
     @api.doc("Get a single SME")
     @api.marshal_with(_sme)
     def get(self, sme_id):

@@ -55,9 +55,6 @@ class DocumentList(Resource):
 @api.response(HTTPStatus.NOT_FOUND, "Document not found")
 @api.response(HTTPStatus.NOT_ACCEPTABLE, "File and document name empty")
 class DocumentByID(Resource):
-
-    """Show a single document and lets you delete it."""
-
     @api.doc("Get a single document")
     @api.marshal_with(_document)
     def get(self, doc_id):

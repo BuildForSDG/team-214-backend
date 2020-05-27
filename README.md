@@ -13,7 +13,6 @@ We are building an SME financing platform solution that would help small and med
 This project uses:
 
 *   poetry as a dependecy manager; configuration in pyproject.toml
-
 *   flake8: for linting
 *   black: for formatting
 *   pytest: for running tests
