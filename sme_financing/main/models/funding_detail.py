@@ -21,5 +21,5 @@ class FundingDetail(db.Model):
     updated = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     def __repr__(self):
-        """Returns this class representation."""
+        """Returns FundingDetail class representation."""
         return f"<FundingDetail '{self.name}'>"

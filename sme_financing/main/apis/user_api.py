@@ -1,4 +1,4 @@
-"""RESTful API User resource"""
+"""RESTful API User resource."""
 
 from flask import request
 from flask_restx import Resource

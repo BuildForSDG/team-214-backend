@@ -1,4 +1,4 @@
-"""RESTful API Document resource"""
+"""RESTful API Document resource."""
 
 from flask_restx import Resource, reqparse
 from flask_restx._http import HTTPStatus
@@ -50,18 +50,19 @@ class DocumentList(Resource):
             return save_document(document_name, file)
 
 
-@api.route("/<int:id>")
-@api.param("id", "The ID of the docuemnt to process")
+@api.route("/<int:doc_id>")
+@api.param("doc_id", "The ID of the docuemnt to process")
 @api.response(HTTPStatus.NOT_FOUND, "Document not found")
 @api.response(HTTPStatus.NOT_ACCEPTABLE, "File and document name empty")
 class DocumentByID(Resource):
+
     """Show a single document and lets you delete it."""
 
     @api.doc("Get a single document")
     @api.marshal_with(_document)
-    def get(self, id):
+    def get(self, doc_id):
         """Retrieve a document."""
-        document = get_document(id)
+        document = get_document(doc_id)
         if not document:
             self.api.abort(code=HTTPStatus.NOT_FOUND, message="Document not found")
         else:
@@ -69,9 +70,9 @@ class DocumentByID(Resource):
 
     @api.doc("Patch a document")
     @api.expect(parser)
-    def patch(self, id):
+    def patch(self, doc_id):
         """Patch a document."""
-        document = get_document(id)
+        document = get_document(doc_id)
         if not document:
             self.api.abort(code=HTTPStatus.NOT_FOUND, message="Document not found")
         else:
@@ -82,13 +83,13 @@ class DocumentByID(Resource):
                 self.api.abort(HTTPStatus.NOT_ACCEPTABLE, message="Both inputs empty")
             else:
                 return edit_document(document, document_name, file)
-                # return self.get(id)
+                # return self.get(doc_id)
 
     @api.doc("Delete a document")
     @api.response(HTTPStatus.BAD_REQUEST, "Can't delete document")
-    def delete(self, id):
-        """Delete a document"""
-        document = get_document(id)
+    def delete(self, doc_id):
+        """Delete a document."""
+        document = get_document(doc_id)
         if not document:
             self.api.abort(code=HTTPStatus.NOT_FOUND, message="Document not found")
         else:

@@ -76,9 +76,9 @@ def get_all_smes():
     return SME.query.all()
 
 
-def get_sme_by_id(id):
-    return SME.query.filter_by(id=id).first()
+def get_sme_by_id(sme_id):
+    return SME.query.filter_by(id=sme_id).first()
 
 
-def get_all_sme_documents(id):
-    return get_sme_by_id(id).documents
+def get_all_sme_documents(sme_id):
+    return get_sme_by_id(sme_id).documents

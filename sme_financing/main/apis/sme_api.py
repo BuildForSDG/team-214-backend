@@ -1,4 +1,4 @@
-"""RESTful API SME resource"""
+"""RESTful API SME resource."""
 
 from flask import request
 from flask_restx import Resource
@@ -30,17 +30,18 @@ class SMEList(Resource):
         return save_sme(data=data)
 
 
-@api.route("/<int:id>")
-@api.param("id", "The ID of the SME to process")
+@api.route("/<int:sme_id>")
+@api.param("sme_id", "The ID of the SME to process")
 @api.response(HTTPStatus.NOT_FOUND, "SME not found")
 class SMEByID(Resource):
+
     """Show a single SME and lets you delete it."""
 
     @api.doc("Get a single SME")
     @api.marshal_with(_sme)
-    def get(self, id):
+    def get(self, sme_id):
         """Retrieve an SME."""
-        sme = get_sme_by_id(id)
+        sme = get_sme_by_id(sme_id)
         if not sme:
             self.api.abort(code=HTTPStatus.NOT_FOUND, message="SME not found")
         else:
@@ -48,9 +49,9 @@ class SMEByID(Resource):
 
     @api.doc("Delete an SME")
     @api.response(HTTPStatus.BAD_REQUEST, "Can't delete SME")
-    def delete(self, id):
-        """Delete an SME"""
-        sme = get_sme_by_id(id)
+    def delete(self, sme_id):
+        """Delete an SME."""
+        sme = get_sme_by_id(sme_id)
         if not sme:
             self.api.abort(code=HTTPStatus.NOT_FOUND, message="SME not found")
         else:

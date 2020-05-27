@@ -1,4 +1,5 @@
 import os
+import tempfile
 
 from sqlalchemy.exc import SQLAlchemyError
 from werkzeug.utils import secure_filename
@@ -6,7 +7,8 @@ from werkzeug.utils import secure_filename
 from .. import db
 from ..models.document import Document
 
-UPLOAD_FOLDER = "/tmp/upload"
+tmpdir = tempfile.mkdtemp()
+# UPLOAD_FOLDER = "/tmp/upload"
 MAX_CONTENT_LENGTH = 5 * 1024 * 1024
 ALLOWED_EXTENSIONS = {"txt", "pdf", "png", "jpg", "jpeg", "gif"}
 
@@ -50,7 +52,7 @@ def check_file(filename, file_size, content_type):
 def save_document(document_name, file):
     filename, file_size, content_type = process_file(file)
     check_file(filename, file_size, content_type)
-    abs_path = os.path.join(UPLOAD_FOLDER, filename)
+    abs_path = os.path.join(tmpdir, filename)
     new_document = Document(
         name=document_name.title(),
         file_name=filename,
@@ -99,7 +101,7 @@ def edit_document(document, document_name, file):
                 else "{:.1f} MB".format(file_size / 1024 / 1024)
             ]
         )
-        abs_path = os.path.join(UPLOAD_FOLDER, filename)
+        abs_path = os.path.join(tmpdir, filename)
         file.save(abs_path)
     response_object = {
         "status": "success",

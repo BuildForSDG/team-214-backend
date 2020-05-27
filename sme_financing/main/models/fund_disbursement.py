@@ -23,5 +23,5 @@ class FundDisbursement(db.Model):
     updated = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     def __repr__(self):
-        """Returns this class representation."""
+        """Returns ProjectMilestone representation."""
         return f"<FundDisbursement '{self.disbursement_date} - {self.status}'>"

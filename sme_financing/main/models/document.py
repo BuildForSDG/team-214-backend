@@ -1,4 +1,4 @@
-"""Document database model"""
+"""Document database model."""
 
 from datetime import datetime
 

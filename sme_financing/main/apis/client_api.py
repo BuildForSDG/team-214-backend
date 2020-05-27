@@ -1,4 +1,4 @@
-"""RESTful API Client resource"""
+"""RESTful API Client resource."""
 
 from flask import request
 from flask_restx import Resource

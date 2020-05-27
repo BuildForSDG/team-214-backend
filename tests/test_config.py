@@ -9,7 +9,7 @@ from sme_financing.main.config import basedir
 
 
 class TestDevelopmentConfig(TestCase):
-    def create_app(self):
+    def create_app():
         app.config.from_object("sme_financing.main.config.DevelopmentConfig")
         return app
 
