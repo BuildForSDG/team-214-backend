@@ -139,3 +139,15 @@ class DocumentDTO:
             "file_size": fields.String(description="File size. Max upload size=5MB"),
         },
     )
+
+
+class FundingApplicationDTO:
+    funding_api = Namespace("funding", description="Funding related operations")
+    funding_application = funding_api.model(
+        "funding_application",
+        {
+            "name": fields.String(required=True, description="Document name"),
+            "status": fields.String(required=True, description="Document name"),
+            "sme_email": fields.String(required=True, description="Client email"),
+        },
+    )

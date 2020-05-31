@@ -8,6 +8,7 @@ funding_application_investors = db.Table(
         "funding_application_id", db.Integer, db.ForeignKey("funding_applications.id")
     ),
     db.Column("investor_id", db.Integer, db.ForeignKey("investors.id")),
+    db.Column("message", db.Text),
 )
 
 

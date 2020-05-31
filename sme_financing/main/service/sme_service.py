@@ -80,5 +80,9 @@ def get_sme_by_id(sme_id):
     return SME.query.filter_by(id=sme_id).first()
 
 
+def get_sme_by_email(sme_email):
+    return SME.query.filter_by(email=sme_email).first()
+
+
 def get_all_sme_documents(sme_id):
     return get_sme_by_id(sme_id).documents
