@@ -127,7 +127,8 @@ def remove_interested_investor(funding_application, investor):
     if investor not in funding_application.investors:
         response_object = {
             "status": "fail",
-            "message": "Investor hasn't registered interest in this funding application",
+            "message": """Investor hasn't registered interest
+                          in this funding application""",
         }
         return response_object, 400
     funding_application.investors.remove(investor)

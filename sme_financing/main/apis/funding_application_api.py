@@ -8,11 +8,11 @@ from ..service.funding_application_service import (
     delete_funding_application,
     get_all_funding_applications,
     get_funding_application_by_id,
-    save_funding_application,
-    update_funding_application,
     get_interested_investors,
     register_investor_interest,
     remove_interested_investor,
+    save_funding_application,
+    update_funding_application,
 )
 from ..service.investor_service import get_investor_by_id
 from .dto import FundingApplicationDTO, InvestorDTO
