@@ -57,6 +57,28 @@ class ClientDTO:
     )
 
 
+class InvestorDTO:
+    investor_api = Namespace("investor", description="Investor related operations")
+    investor = investor_api.model(
+        "investor",
+        {
+            "name": fields.String(required=True, description="Investor name"),
+            "postal_address": fields.String(
+                required=True, description="Investor postal address"
+            ),
+            "street_address": fields.String(
+                required=True, description="Investor street address"
+            ),
+            "city": fields.String(required=True, description="Investor city"),
+            "telephone": fields.String(
+                required=True, description="Investor telephone number"
+            ),
+            "email": fields.String(required=True, description="Investor email"),
+            "investor_type": fields.String(required=True, description="Investor type."),
+        },
+    )
+
+
 class SMEDTO:
     sme_api = Namespace("sme", description="SME related operations")
     sme_list = sme_api.model(
