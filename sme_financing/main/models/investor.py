@@ -20,11 +20,9 @@ class Investor(db.Model):
     investor_type = db.Column(db.String(255), nullable=False)
 
     funding_criterion = db.relationship("FundingCriteria", backref="investor")
-    # funding_applications = db.relationship(
-    #     "FundingApplication",
-    #     secondary=funding_application_investors,
-    #     backref=db.backref("investors"),
-    # )
+    funding_applications = db.relationship(
+        "FundingApplication", secondary="funding_application_investors", viewonly=True
+    )
     funding_projects = db.relationship("FundingProject", backref="investor")
 
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)

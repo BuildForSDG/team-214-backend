@@ -5,9 +5,13 @@ from ..models.funding_application import FundingApplication
 from .sme_service import get_sme_by_email
 
 
+def update():
+    db.session.commit()
+
+
 def commit_changes(data):
     db.session.add(data)
-    db.session.commit()
+    update()
 
 
 def save_funding_application(data):
@@ -86,5 +90,56 @@ def get_all_funding_applications():
     return FundingApplication.query.all()
 
 
-def register_investor_interest():
-    pass
+def register_investor_interest(funding_application, investor, investor_message):
+    if investor in funding_application.investors:
+        response_object = {
+            "status": "fail",
+            "message": "This investor is already interested",
+        }
+        return response_object, 400
+    # funding_application.investors.append(investor)
+    funding_application.add_investor(investor, investor_message)
+    try:
+        update()
+        response_object = {
+            "status": "success",
+            "message": "Successfully registered.",
+        }
+        return response_object, 201
+    except SQLAlchemyError as err:
+        db.session.rollback()
+        response_object = {"status": "error", "message": str(err)}
+        return response_object, 500
+
+
+def get_interested_investors(funding_application_id):
+    funding_application = get_funding_application_by_id(funding_application_id)
+    if not funding_application:
+        response_object = {
+            "status": "error",
+            "message": "Funding Application specified doesn't exist.",
+        }
+        return response_object, 404
+    else:
+        return get_funding_application_by_id(funding_application_id).investors
+
+
+def remove_interested_investor(funding_application, investor):
+    if investor not in funding_application.investors:
+        response_object = {
+            "status": "fail",
+            "message": """Investor hasn't registered interest""",
+        }
+        return response_object, 400
+    funding_application.investors.remove(investor)
+    try:
+        update()
+        response_object = {
+            "status": "success",
+            "message": "Successfully removed.",
+        }
+        return response_object, 201
+    except SQLAlchemyError as err:
+        db.session.rollback()
+        response_object = {"status": "error", "message": str(err)}
+        return response_object, 500
