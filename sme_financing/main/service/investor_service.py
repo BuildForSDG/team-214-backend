@@ -4,9 +4,13 @@ from .. import db
 from ..models.investor import Investor
 
 
+def update():
+    db.session.commit()
+
+
 def commit_changes(data):
     db.session.add(data)
-    db.session.commit()
+    update()
 
 
 def save_investor(data):
@@ -26,6 +30,50 @@ def save_investor(data):
     except SQLAlchemyError as error:
         response_object = {"status": "error", "message": str(error)}
         return response_object, 500
+
+
+def delete_investor(investor):
+    try:
+        db.session.delete(investor)
+        update()
+        response_object = {
+            "status": "success",
+            "message": "Investor successfully deleted.",
+        }
+        return response_object, 204
+    except SQLAlchemyError as e:
+        db.session.rollback()
+        response_object = {"status": "error", "message": str(e)}
+        return response_object, 400
+
+
+def update_investor(data, investor):
+    if data.get("name"):
+        investor.name = data["name"]
+    if data.get("postal_address"):
+        investor.postal_address = data["postal_address"]
+    if data.get("street_address"):
+        investor.street_address = data["street_address"]
+    if data.get("city"):
+        investor.city = data["city"]
+    if data.get("telephone"):
+        investor.telephone = data["telephone"]
+    if data.get("email"):
+        investor.email = data["email"]
+    if data.get("investor_type"):
+        investor.investor_type = data["investor_type"]
+
+    try:
+        update()
+        response_object = {
+            "status": "success",
+            "message": "Investor successfully updated.",
+        }
+        return response_object, 201
+    except SQLAlchemyError as err:
+        db.session.rollback()
+        response_object = {"status": "error", "message": str(err)}
+        return response_object, 400
 
 
 def get_all_investors():

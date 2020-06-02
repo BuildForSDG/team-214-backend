@@ -54,8 +54,7 @@ def update_funding_application(data, funding_application):
             }
             return response_object, 404
     try:
-        db.session.add(funding_application)
-        db.session.commit()
+        update()
         response_object = {
             "status": "success",
             "message": "Successfully updated.",
@@ -70,7 +69,7 @@ def update_funding_application(data, funding_application):
 def delete_funding_application(funding_application):
     try:
         db.session.delete(funding_application)
-        db.session.commit()
+        update()
         response_object = {
             "status": "success",
             "message": "Funding Application successfully deleted.",
