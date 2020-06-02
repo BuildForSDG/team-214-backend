@@ -2,9 +2,11 @@
 
 import os
 import unittest
+from datetime import datetime
 
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
+from sqlalchemy import DDL, event
 
 from sme_financing.main import create_app, db
 from sme_financing.main.api_v1 import blueprint as api_v1
@@ -38,6 +40,70 @@ manager.add_command("db", MigrateCommand)
 @app.before_first_request
 def create_tables():
     db.create_all()
+
+
+@manager.command
+def insert():
+    db.session.add(
+        user.User(
+            email="herve@gmail.com",
+            active=True,
+            admin=False,
+            public_id="herve",
+            username="herve",
+            password_hash="$2b$12$KPeN6t58TIgxeZyV8y32Jujydcbhb",
+        )
+    )
+    db.session.add(
+        client.Client(
+            lastname="herve",
+            firstname="herve",
+            gender="male",
+            postal_address="12 po box 78",
+            residential_address="Accra",
+            telephone="+233358569587",
+            nationality="Ghana",
+            education_level="Masters Degree",
+            position="CTO",
+            user_id=1,
+        )
+    )
+    db.session.add(
+        sme.SME(
+            name="Short stay Accra",
+            postal_address="12 po box 78",
+            location="Accra",
+            telephone="+23369584587",
+            email="stay@gmail.com",
+            description="Yeah it''s a hotel",
+            sector="Hotel Business",
+            principal_product_service="Hotel",
+            other_product_service="Restaurant",
+            age="More than 24 months",
+            establishment_date=datetime.strptime("2019-07-11", "%Y-%m-%d").date(),
+            ownership_type="LLC",
+            bank_account_details="789568521524",
+            employees_number="24",
+            client_id=1,
+        )
+    )
+    db.session.add(
+        funding_application.FundingApplication(
+            name="Cool Funding Application 233235", status="Active", sme_id=1
+        )
+    )
+    db.session.add(
+        investor.Investor(
+            name="Bank of Africa",
+            postal_address="12 PO BO",
+            street_address="25 STreet",
+            city="Accra",
+            telephone="+23358696584",
+            email="boa@gmail.com",
+            investor_type="Bank",
+        )
+    )
+    db.session.commit()
 
 
 @manager.command

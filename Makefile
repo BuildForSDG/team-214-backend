@@ -4,6 +4,9 @@ clean:
 	rm -rf migrations
 	rm sme_financing/main/*.db
 
+insert:
+	python manage.py insert
+
 upgrade-db:
 	python manage.py db migrate
 	python manage.py db upgrade
@@ -11,7 +14,7 @@ upgrade-db:
 init-db:
 	python manage.py db init
 
-all-db: init-db upgrade-db
+all-db: init-db upgrade-db insert
 
 tests:
 	poetry run pytest --disable-warnings
