@@ -90,14 +90,15 @@ def get_all_funding_applications():
     return FundingApplication.query.all()
 
 
-def register_investor_interest(data, funding_application, investor):
+def register_investor_interest(funding_application, investor, investor_message):
     if investor in funding_application.investors:
         response_object = {
             "status": "fail",
-            "message": "This investor has already been registered",
+            "message": "This investor is already interested",
         }
         return response_object, 400
-    funding_application.investors.append(investor)
+    # funding_application.investors.append(investor)
+    funding_application.add_investor(investor, investor_message)
     try:
         update()
         response_object = {
@@ -127,8 +128,7 @@ def remove_interested_investor(funding_application, investor):
     if investor not in funding_application.investors:
         response_object = {
             "status": "fail",
-            "message": """Investor hasn't registered interest
-                          in this funding application""",
+            "message": """Investor hasn't registered interest""",
         }
         return response_object, 400
     funding_application.investors.remove(investor)

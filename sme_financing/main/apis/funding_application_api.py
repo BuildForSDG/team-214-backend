@@ -1,7 +1,7 @@
 """RESTful FundingApplication resource."""
 
 from flask import request
-from flask_restx import Resource
+from flask_restx import Resource, reqparse
 from flask_restx._http import HTTPStatus
 
 from ..service.funding_application_service import (
@@ -16,6 +16,9 @@ from ..service.funding_application_service import (
 )
 from ..service.investor_service import get_investor_by_id
 from .dto import FundingApplicationDTO, InvestorDTO
+
+parser = reqparse.RequestParser()
+parser.add_argument("message", type=str, help="Investor Message", location="form")
 
 api = FundingApplicationDTO.funding_api
 _funding_application = FundingApplicationDTO.funding_application
@@ -105,6 +108,7 @@ class RegisterInvestorInterest(Resource):
     @api.doc("Register an investor interest")
     @api.response(201, "Interest successfully registered")
     @api.response(404, "Investor/Funding apllication not found")
+    @api.expect(parser, validate=True)
     def post(self, funding_application_id, investor_id):
         """Register an investor interest in a funding application."""
         funding_application = get_funding_application_by_id(funding_application_id)
@@ -112,11 +116,15 @@ class RegisterInvestorInterest(Resource):
             self.api.abort(
                 code=HTTPStatus.NOT_FOUND, message="Funding Application not found"
             )
+        parse_data = parser.parse_args()
+        investor_message = parse_data["message"]
         investor = get_investor_by_id(investor_id)
         if not investor:
             self.api.abort(code=HTTPStatus.NOT_FOUND, message="Investor not found")
-        data = request.json
-        return register_investor_interest(data, funding_application, investor)
+        # data = request.json
+        return register_investor_interest(
+            funding_application, investor, investor_message
+        )
 
     @api.doc("Remove an investor interest")
     @api.response(HTTPStatus.BAD_REQUEST, "Can't remove the investor interest")
