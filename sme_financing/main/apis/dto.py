@@ -151,3 +151,14 @@ class FundingApplicationDTO:
             "sme_email": fields.String(required=True, description="Client email"),
         },
     )
+
+
+class FundingCriteriaDTO:
+    funding_criteria_api = Namespace("funding criteria",description="Funding criteria related operations")
+    funding_criteria =funding_criteria_api.model("funding_criteria",{
+        "name": fields.String(required =True,description = "Funding Criteria name"),
+        "description": fields.String(required = True,description = " Description of funding criteria"),
+        "investor_id": fields.Integer(required =True),
+
+
+    },)    
