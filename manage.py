@@ -6,7 +6,6 @@ from datetime import datetime
 
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
-from sqlalchemy import DDL, event
 
 from sme_financing.main import create_app, db
 from sme_financing.main.api_v1 import blueprint as api_v1
@@ -51,7 +50,6 @@ def insert():
             admin=False,
             public_id="herve",
             username="herve",
-            password_hash="$2b$12$KPeN6t58TIgxeZyV8y32Jujydcbhb",
         )
     )
     db.session.add(
