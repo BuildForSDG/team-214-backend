@@ -15,13 +15,13 @@ from ..service.funding_application_service import (
     update_funding_application,
 )
 from ..service.investor_service import get_investor_by_id
-from .dto import FundingApplicationDTO, InvestorDTO
+from .dto import FundingDTO, InvestorDTO
 
 parser = reqparse.RequestParser()
 parser.add_argument("message", type=str, help="Investor Message", location="form")
 
-api = FundingApplicationDTO.funding_api
-_funding_application = FundingApplicationDTO.funding_application
+api = FundingDTO.funding_api
+_funding_application = FundingDTO.funding_application
 _investor = InvestorDTO.investor
 
 

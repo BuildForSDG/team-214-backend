@@ -163,7 +163,7 @@ class DocumentDTO:
     )
 
 
-class FundingApplicationDTO:
+class FundingDTO:
     funding_api = Namespace("funding", description="Funding related operations")
     funding_application = funding_api.model(
         "funding_application",
@@ -174,13 +174,24 @@ class FundingApplicationDTO:
         },
     )
 
+    funding_criteria = funding_api.model(
+        "funding_criteria",
+        {
+            "name": fields.String(required=True, description="Funding Criteria name"),
+            "description": fields.String(
+                required=True, description=" Description of funding criteria"
+            ),
+            "investor_email": fields.String(required=True),
+        },
+    )
 
-class FundingCriteriaDTO:
-    funding_criteria_api = Namespace("funding criteria",description="Funding criteria related operations")
-    funding_criteria =funding_criteria_api.model("funding_criteria",{
-        "name": fields.String(required =True,description = "Funding Criteria name"),
-        "description": fields.String(required = True,description = " Description of funding criteria"),
-        "investor_id": fields.Integer(required =True),
-
-
-    },)    
+    funding_criteria_display = funding_api.model(
+        "funding_criteria_display",
+        {
+            "name": fields.String(description="Funding Criteria name"),
+            "description": fields.String(
+                description=" Description of funding criteria"
+            ),
+            "investor": fields.Nested(InvestorDTO().investor, description="Investor"),
+        },
+    )

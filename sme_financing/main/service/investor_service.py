@@ -82,3 +82,7 @@ def get_all_investors():
 
 def get_investor_by_id(investor_id):
     return Investor.query.filter_by(id=investor_id).first()
+
+
+def get_investor_by_email(investor_email):
+    return Investor.query.filter_by(email=investor_email).first()
