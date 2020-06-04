@@ -1,7 +1,10 @@
-from ..models.funding_project import FundingProject
 from datetime import datetime
-from sme_financing.main import db
+
 from sqlalchemy.exc import SQLAlchemyError
+
+from sme_financing.main import db
+
+from ..models.funding_project import FundingProject
 from .funding_application_service import get_funding_application_by_number
 from .investor_service import get_investor_by_email
 
@@ -75,6 +78,25 @@ def delete_funding_project(funding_project):
         return response_object, 400
 
 
+def set_funding_project(data, funding_project):
+    if data.get("title"):
+        funding_project.title = data["title"]
+    if data.get("description"):
+        funding_project.description = data["description"]
+    if data.get("relevance"):
+        funding_project.relevance = data["relevance"]
+    if data.get("objectives"):
+        funding_project.objectives = data["objectives"]
+    if data.get("justification"):
+        funding_project.justification = data["justification"]
+    if data.get("work_plan"):
+        funding_project.work_plan = data["work_plan"]
+    if data.get("status"):
+        funding_project.status = data["status"]
+    if data.get("fund_amount"):
+        funding_project.fund_amount = float(data["fund_amount"])
+
+
 def update_funding_project(data, funding_project):
     if data.get("investor_email"):
         investor = get_investor_by_email(data["investor_email"])
@@ -93,25 +115,8 @@ def update_funding_project(data, funding_project):
                 "message": "Funding Application not found.",
             }
             return response_object, 404
-    # if data.get("number"):
-    #     funding_project.number = data["number"]
-    if data.get("title"):
-        funding_project.title = data["title"]
-    if data.get("description"):
-        funding_project.description = data["description"]
-    if data.get("relevance"):
-        funding_project.relevance = data["relevance"]
-    if data.get("objectives"):
-        funding_project.objectives = data["objectives"]
-    if data.get("justification"):
-        funding_project.justification = data["justification"]
-    if data.get("work_plan"):
-        funding_project.work_plan = data["work_plan"]
-    if data.get("status"):
-        funding_project.status = data["status"]
-    if data.get("fund_amount"):
-        funding_project.fund_amount = float(data["fund_amount"])
 
+    set_funding_project(data, funding_project)
     try:
         update()
         response_object = {

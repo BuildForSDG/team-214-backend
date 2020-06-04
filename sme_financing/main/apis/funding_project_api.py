@@ -1,19 +1,12 @@
-from .dto import FundingProjectDTO
 from flask import request
-from flask_restx._http import HTTPStatus
 from flask_restx import Resource
+from flask_restx._http import HTTPStatus
 
 from ..service import funding_project_service as service
-
+from .dto import FundingProjectDTO
 
 api = FundingProjectDTO.funding_project_api
 _funding_project = FundingProjectDTO.funding_project
-
-
-def check_funding_project(funding_project_number):
-    funding_project = service.get_funding_project_by_number(funding_project_number)
-    if not funding_project:
-        self.api.abort(code=HTTPStatus.NOT_FOUND, message="Funding project not found")
 
 
 @api.route("/")
