@@ -9,7 +9,8 @@ class ProjectMilestone(db.Model):
     __tablename__ = "project_milestones"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    description = db.Column(db.String(255), nullable=False)
+    title = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.Text, nullable=False)
     status = db.Column(db.String(50), nullable=False)
     start = db.Column(db.DateTime, nullable=False)
     deadline = db.Column(db.DateTime, nullable=False)
@@ -21,5 +22,4 @@ class ProjectMilestone(db.Model):
     updated = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     def __repr__(self):
-        """Returns ProjectMilestone representation."""
-        return f"<ProjectMilestone '{self.start} - {self.status}'>"
+        return f"<ProjectMilestone '{self.name} - {self.status}'>"

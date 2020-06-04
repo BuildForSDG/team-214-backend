@@ -18,7 +18,7 @@ def save_funding_criteria(data):
     This method saves the new funding criteria data
     """
     funding_criteria = FundingCriteria(
-        name=data["name"], description=data["description"]
+        title=data["title"], description=data["description"]
     )
     investor = get_investor_by_email(data["investor_email"])
     if not investor:
@@ -47,8 +47,8 @@ def update_funding_criteria(data, funding_criteria):
 
     """
     # checking for the updated field
-    if data.get("name"):
-        funding_criteria.name = data["name"]
+    if data.get("title"):
+        funding_criteria.title = data["title"]
     if data.get("description"):
         funding_criteria.description = data["description"]
     if data.get("investor_email"):

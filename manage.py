@@ -87,7 +87,7 @@ def insert():
     )
     db.session.add(
         funding_application.FundingApplication(
-            name="Cool Funding Application 233235", status="Active", sme_id=1
+            number="FA 1A 2020", status="Active", sme_id=1
         )
     )
     db.session.add(
