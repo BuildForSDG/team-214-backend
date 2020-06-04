@@ -9,7 +9,7 @@ class FundingCriteria(db.Model):
     __tablename__ = "funding_criteria"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(255), nullable=False)
+    title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255), nullable=False)
 
     investor_id = db.Column(db.Integer, db.ForeignKey("investors.id"))

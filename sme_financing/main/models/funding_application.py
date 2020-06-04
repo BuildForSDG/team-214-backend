@@ -47,7 +47,7 @@ class FundingApplication(db.Model):
     __tablename__ = "funding_applications"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(255), nullable=False)
+    number = db.Column(db.String(15), nullable=False)
     status = db.Column(db.String(50), nullable=False)
 
     sme_id = db.Column(db.Integer, db.ForeignKey("smes.id"))
@@ -77,4 +77,4 @@ class FundingApplication(db.Model):
 
     def __repr__(self):
         """Returns this class representation."""
-        return f"<FundingApplication '{self.name} - {self.status}'>"
+        return f"<FundingApplication '{self.number} - {self.status}'>"

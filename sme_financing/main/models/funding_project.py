@@ -9,9 +9,15 @@ class FundingProject(db.Model):
     __tablename__ = "funding_projects"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(255), nullable=False)
-    description = db.Column(db.String(255), nullable=False)
+    number = db.Column(db.String(15), unique=True, nullable=False)
+    title = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    relevance = db.Column(db.Text, nullable=False)
+    objectives = db.Column(db.Text, nullable=False)
+    justification = db.Column(db.Text, nullable=False)
+    work_plan = db.Column(db.Text, nullable=False)
     status = db.Column(db.String(50), nullable=False)
+    fund_amount = db.Column(db.Float, nullable=False)
 
     start_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     end_date = db.Column(db.DateTime, nullable=True)

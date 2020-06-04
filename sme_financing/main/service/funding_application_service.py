@@ -16,7 +16,7 @@ def commit_changes(data):
 
 def save_funding_application(data):
     new_funding_application = FundingApplication(
-        name=data["name"], status=data["status"]
+        number=data["number"], status=data["status"]
     )
     sme = get_sme_by_email(data["sme_email"])
     if not sme:
@@ -41,8 +41,8 @@ def save_funding_application(data):
 
 
 def update_funding_application(data, funding_application):
-    if data.get("name"):
-        funding_application.name = data["name"]
+    if data.get("number"):
+        funding_application.number = data["number"]
     if data.get("status"):
         funding_application.status = data["status"]
     if data.get("sme_email"):
@@ -85,6 +85,10 @@ def get_funding_application_by_id(funding_application_id):
     return FundingApplication.query.filter_by(id=funding_application_id).first()
 
 
+def get_funding_application_by_number(number):
+    return FundingApplication.query.filter_by(number=number).first()
+
+
 def get_all_funding_applications():
     return FundingApplication.query.all()
 
@@ -120,7 +124,7 @@ def get_interested_investors(funding_application_id):
         }
         return response_object, 404
     else:
-        return get_funding_application_by_id(funding_application_id).investors
+        return funding_application.investors
 
 
 def remove_interested_investor(funding_application, investor):

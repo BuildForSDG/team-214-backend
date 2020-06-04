@@ -2,7 +2,7 @@ from flask_restx import Namespace, fields
 
 
 class UserDTO:
-    user_api = Namespace("user", description="User related operations")
+    user_api = Namespace("User", description="User related operations")
     user = user_api.model(
         "user",
         {
@@ -25,7 +25,7 @@ class UserDTO:
 
 
 class ClientDTO:
-    client_api = Namespace("client", description="Client related operations")
+    client_api = Namespace("Client", description="Client related operations")
     client = client_api.model(
         "client",
         {
@@ -58,7 +58,7 @@ class ClientDTO:
 
 
 class InvestorDTO:
-    investor_api = Namespace("investor", description="Investor related operations")
+    investor_api = Namespace("Investor", description="Investor related operations")
     investor = investor_api.model(
         "investor",
         {
@@ -80,7 +80,7 @@ class InvestorDTO:
 
 
 class SMEDTO:
-    sme_api = Namespace("sme", description="SME related operations")
+    sme_api = Namespace("SME", description="SME related operations")
     sme_list = sme_api.model(
         "sme_list",
         {
@@ -151,7 +151,7 @@ class SMEDTO:
 
 
 class DocumentDTO:
-    document_api = Namespace("document", description="Document related operations")
+    document_api = Namespace("Document", description="Document related operations")
     document = document_api.model(
         "document",
         {
@@ -164,22 +164,26 @@ class DocumentDTO:
 
 
 class FundingDTO:
-    funding_api = Namespace("funding", description="Funding related operations")
+    funding_api = Namespace("Funding", description="Funding related operations")
     funding_application = funding_api.model(
         "funding_application",
         {
-            "name": fields.String(required=True, description="Document name"),
-            "status": fields.String(required=True, description="Document name"),
-            "sme_email": fields.String(required=True, description="Client email"),
+            "number": fields.String(
+                required=True, description="Funding application number"
+            ),
+            "status": fields.String(
+                required=True, description="Funding applicatio status"
+            ),
+            "sme_email": fields.String(required=True, description="SME email"),
         },
     )
 
     funding_criteria = funding_api.model(
         "funding_criteria",
         {
-            "name": fields.String(required=True, description="Funding Criteria name"),
+            "title": fields.String(required=True, description="Funding criteria title"),
             "description": fields.String(
-                required=True, description=" Description of funding criteria"
+                required=True, description="Description of funding criteria"
             ),
             "investor_email": fields.String(required=True),
         },
@@ -189,9 +193,43 @@ class FundingDTO:
         "funding_criteria_display",
         {
             "name": fields.String(description="Funding Criteria name"),
-            "description": fields.String(
-                description=" Description of funding criteria"
-            ),
+            "description": fields.String(description="Description of funding criteria"),
             "investor": fields.Nested(InvestorDTO().investor, description="Investor"),
+        },
+    )
+
+
+class FundingProjectDTO:
+    funding_project_api = Namespace(
+        "Funding Project", description="Funding project related operations"
+    )
+    funding_project = funding_project_api.model(
+        "funding_project",
+        {
+            "number": fields.String(required=True, description="Project number"),
+            "title": fields.String(required=True, description="Project title"),
+            "description": fields.String(
+                required=True, description="Project description"
+            ),
+            "relevance": fields.String(required=True, description="Project relevance"),
+            "objectives": fields.String(
+                required=True, description="Project objectives"
+            ),
+            "justification": fields.String(
+                required=True, description="Project justification"
+            ),
+            "work_plan": fields.String(required=True, description="Project work plan"),
+            "status": fields.String(required=True, description="Project status"),
+            "fund_amount": fields.Float(
+                required=True, description="Project fund amount"
+            ),
+            "start_date": fields.Date(description="Project starting date"),
+            "end_date": fields.Date(description="Project ending date"),
+            "investor_email": fields.String(
+                required=True, description="Investor email"
+            ),
+            "funding_application_number": fields.String(
+                required=True, description="Funding application number"
+            ),
         },
     )
