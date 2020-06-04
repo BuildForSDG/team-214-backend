@@ -197,3 +197,39 @@ class FundingDTO:
             "investor": fields.Nested(InvestorDTO().investor, description="Investor"),
         },
     )
+
+
+class FundingProjectDTO:
+    funding_project_api = Namespace(
+        "Funding Project", description="Funding project related operations"
+    )
+    funding_project = funding_project_api.model(
+        "funding_project",
+        {
+            "number": fields.String(required=True, description="Project number"),
+            "title": fields.String(required=True, description="Project title"),
+            "description": fields.String(
+                required=True, description="Project description"
+            ),
+            "relevance": fields.String(required=True, description="Project relevance"),
+            "objectives": fields.String(
+                required=True, description="Project objectives"
+            ),
+            "justification": fields.String(
+                required=True, description="Project justification"
+            ),
+            "work_plan": fields.String(required=True, description="Project work plan"),
+            "status": fields.String(required=True, description="Project status"),
+            "fund_amount": fields.Float(
+                required=True, description="Project fund amount"
+            ),
+            "start_date": fields.Date(description="Project starting date"),
+            "end_date": fields.Date(description="Project ending date"),
+            "investor_email": fields.String(
+                required=True, description="Investor email"
+            ),
+            "funding_application_number": fields.String(
+                required=True, description="Funding application number"
+            ),
+        },
+    )
