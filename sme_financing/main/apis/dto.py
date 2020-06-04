@@ -189,16 +189,32 @@ class FundingDTO:
         },
     )
 
+<<<<<<< HEAD
     funding_criteria_display = funding_api.model(
         "funding_criteria_display",
         {
             "name": fields.String(description="Funding Criteria name"),
             "description": fields.String(description="Description of funding criteria"),
             "investor": fields.Nested(InvestorDTO().investor, description="Investor"),
+=======
+class FundingCriteriaDTO:
+    funding_criteria_api = Namespace(
+        "funding criteria", description="Funding criteria related operations"
+    )
+    funding_criteria = funding_criteria_api.model(
+        "funding_criteria",
+        {
+            "name": fields.String(required=True, description="Funding Criteria name"),
+            "description": fields.String(
+                required=True, description=" Description of funding criteria"
+            ),
+            "investor_id": fields.Integer(required=True),
+>>>>>>> Authenication
         },
     )
 
 
+<<<<<<< HEAD
 class FundingProjectDTO:
     funding_project_api = Namespace(
         "Funding Project", description="Funding project related operations"
@@ -231,5 +247,14 @@ class FundingProjectDTO:
             "funding_application_number": fields.String(
                 required=True, description="Funding application number"
             ),
+=======
+class LoginDTO:
+    login_api = Namespace("Login", description="User login")
+    login = login_api.model(
+        "Login",
+        {
+            "email address": fields.String(required=True, description="user email"),
+            "password": fields.String(required=True, description="user password"),
+>>>>>>> Authenication
         },
     )
