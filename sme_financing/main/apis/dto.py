@@ -247,3 +247,14 @@ class FundingDetailDTO:
             # "funding_project_number": fields.String(required=True),
         },
     )
+
+
+class LoginDTO:
+    login_api = Namespace("Login", description="User login")
+    login = login_api.model(
+        "Login",
+        {
+            "email address": fields.String(required=True, description="user email"),
+            "password": fields.String(required=True, description="user password"),
+        },
+    )
