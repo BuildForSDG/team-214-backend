@@ -6,9 +6,12 @@ from .apis.document_api import api as document_ns
 from .apis.funding_application_api import api as funding_ns
 from .apis.funding_criteria_api import api as funding_criteria_ns
 <<<<<<< HEAD
+<<<<<<< HEAD
 from .apis.funding_project_api import api as funding_project_ns
 =======
 >>>>>>> Authenication
+=======
+>>>>>>> 2a3920c54337a2001f2bca813afe1bf70e296a47
 from .apis.investor_api import api as investor_ns
 from .apis.sme_api import api as sme_ns
 from .apis.user_api import api as user_ns

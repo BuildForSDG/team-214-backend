@@ -209,11 +209,15 @@ class FundingCriteriaDTO:
                 required=True, description=" Description of funding criteria"
             ),
             "investor_id": fields.Integer(required=True),
+<<<<<<< HEAD
 >>>>>>> Authenication
+=======
+>>>>>>> 2a3920c54337a2001f2bca813afe1bf70e296a47
         },
     )
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 class FundingProjectDTO:
     funding_project_api = Namespace(
@@ -248,6 +252,8 @@ class FundingProjectDTO:
                 required=True, description="Funding application number"
             ),
 =======
+=======
+>>>>>>> 2a3920c54337a2001f2bca813afe1bf70e296a47
 class LoginDTO:
     login_api = Namespace("Login", description="User login")
     login = login_api.model(
@@ -255,6 +261,9 @@ class LoginDTO:
         {
             "email address": fields.String(required=True, description="user email"),
             "password": fields.String(required=True, description="user password"),
+<<<<<<< HEAD
 >>>>>>> Authenication
+=======
+>>>>>>> 2a3920c54337a2001f2bca813afe1bf70e296a47
         },
     )
