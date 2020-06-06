@@ -254,7 +254,18 @@ class LoginDTO:
     login = login_api.model(
         "Login",
         {
-            "email address": fields.String(required=True, description="user email"),
+            "email": fields.String(required=True, description="user email"),
+            "password": fields.String(required=True, description="user password"),
+        },
+    )
+
+
+class SignUpDTO:
+    signup_api = Namespace("Register", description="User register")
+    signup = signup_api.model(
+        "register",
+        {
+            "email": fields.String(required=True, description="user email"),
             "password": fields.String(required=True, description="user password"),
         },
     )

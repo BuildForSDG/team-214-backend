@@ -1,14 +1,12 @@
 import json
-import os
 
-import firebase_admin
 import requests
 from firebase_admin import auth
 from firebase_admin.exceptions import FirebaseError
 
-firebase = firebase_admin.initialize_app()
 
-FIREBASE_WEB_API_KEY = os.environ.get("FIREBASE_WEB_API_KEY")
+FIREBASE_WEB_API_KEY = "AIzaSyB5XpnbwDmwRu5c1rv5zI3EjTfYKFq_Mak"
+
 rest_api_url = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword"
 
 
