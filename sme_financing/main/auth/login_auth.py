@@ -4,7 +4,6 @@ import requests
 from firebase_admin import auth
 from firebase_admin.exceptions import FirebaseError
 
-
 FIREBASE_WEB_API_KEY = "AIzaSyB5XpnbwDmwRu5c1rv5zI3EjTfYKFq_Mak"
 
 rest_api_url = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword"
@@ -46,6 +45,12 @@ def verify_user(token):
             return response_object, 502
     else:
         pass
+
+
+# def forget_password(email:str):
+#     '''
+
+#     '''
 
 
 if __name__ == "__main__":
