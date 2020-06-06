@@ -189,14 +189,16 @@ class FundingDTO:
         },
     )
 
-<<<<<<< HEAD
     funding_criteria_display = funding_api.model(
         "funding_criteria_display",
         {
             "name": fields.String(description="Funding Criteria name"),
             "description": fields.String(description="Description of funding criteria"),
             "investor": fields.Nested(InvestorDTO().investor, description="Investor"),
-=======
+        },
+    )
+
+
 class FundingCriteriaDTO:
     funding_criteria_api = Namespace(
         "funding criteria", description="Funding criteria related operations"
@@ -209,16 +211,10 @@ class FundingCriteriaDTO:
                 required=True, description=" Description of funding criteria"
             ),
             "investor_id": fields.Integer(required=True),
-<<<<<<< HEAD
->>>>>>> Authenication
-=======
->>>>>>> 2a3920c54337a2001f2bca813afe1bf70e296a47
         },
     )
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 class FundingProjectDTO:
     funding_project_api = Namespace(
         "Funding Project", description="Funding project related operations"
@@ -251,19 +247,26 @@ class FundingProjectDTO:
             "funding_application_number": fields.String(
                 required=True, description="Funding application number"
             ),
-=======
-=======
->>>>>>> 2a3920c54337a2001f2bca813afe1bf70e296a47
+        },
+    )
+
+
 class LoginDTO:
     login_api = Namespace("Login", description="User login")
     login = login_api.model(
         "Login",
         {
-            "email address": fields.String(required=True, description="user email"),
+            "email": fields.String(required=True, description="user email"),
             "password": fields.String(required=True, description="user password"),
-<<<<<<< HEAD
->>>>>>> Authenication
-=======
->>>>>>> 2a3920c54337a2001f2bca813afe1bf70e296a47
+        },
+    )
+
+class SignUpDTO:
+    signup_api = Namespace("Register", description="User register")
+    signup = signup_api.model(
+        "register",
+        {
+            "email": fields.String(required=True, description="user email"),
+            "password": fields.String(required=True, description="user password"),
         },
     )

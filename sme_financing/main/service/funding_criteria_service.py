@@ -2,29 +2,12 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from .. import db
 from ..models.funding_criteria import FundingCriteria
-<<<<<<< HEAD
-<<<<<<< HEAD
-from .investor_service import get_investor_by_email
+from .investor_service import get_investor_by_email, get_investor_by_id
 
 
 def commit_changes(new_data):
     """
     This method commits new changes to the funding_criteria model
-=======
-=======
->>>>>>> 2a3920c54337a2001f2bca813afe1bf70e296a47
-from .investor_service import get_investor_by_id
-
-
-def commit_changes(new_data):
-    """
-    This method commits new changes to the funding_criteria model
-
-
-<<<<<<< HEAD
->>>>>>> Authenication
-=======
->>>>>>> 2a3920c54337a2001f2bca813afe1bf70e296a47
     """
     db.session.add(new_data)
     db.session.commit()
@@ -34,42 +17,31 @@ def save_funding_criteria(data):
     """
     This method saves the new funding criteria data
     """
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     funding_criteria = FundingCriteria(
         title=data["title"], description=data["description"]
     )
     investor = get_investor_by_email(data["investor_email"])
     if not investor:
-=======
-=======
->>>>>>> 2a3920c54337a2001f2bca813afe1bf70e296a47
-    fund_criteria = FundingCriteria(
-        name=data["name"],
-        description=data["description"],
-        investor_id=data["investor_id"],
-    )
+        fund_criteria = FundingCriteria(
+            name=data["name"],
+            description=data["description"],
+            investor_id=data["investor_id"],
+        )
     Investor = get_investor_by_id(data["investor_id"])
     if not Investor:
-<<<<<<< HEAD
->>>>>>> Authenication
-=======
->>>>>>> 2a3920c54337a2001f2bca813afe1bf70e296a47
+
         response_object = {
             "status": "error",
             "message": "Invalid investor!",
         }
         return response_object, 409
     else:
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         funding_criteria.investor = investor
-=======
+
         fund_criteria.investor_id = Investor
->>>>>>> Authenication
-=======
-        fund_criteria.investor_id = Investor
->>>>>>> 2a3920c54337a2001f2bca813afe1bf70e296a47
+
         try:
             commit_changes(funding_criteria)
             response_object = {
@@ -88,8 +60,7 @@ def update_funding_criteria(data, funding_criteria):
 
     """
     # checking for the updated field
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     if data.get("title"):
         funding_criteria.title = data["title"]
     if data.get("description"):
@@ -118,9 +89,6 @@ def update_funding_criteria(data, funding_criteria):
         response_object = {"status": "error", "message": str(error)}
         return response_object, 400
 
-=======
-=======
->>>>>>> 2a3920c54337a2001f2bca813afe1bf70e296a47
     if data.get("name"):
         funding_criteria.name = data["name"]
     if data.get("description"):
@@ -150,10 +118,6 @@ def update_funding_criteria(data, funding_criteria):
             response_object = {"status": "error", "message": str(error)}
             return response_object, 400
 
-<<<<<<< HEAD
->>>>>>> Authenication
-=======
->>>>>>> 2a3920c54337a2001f2bca813afe1bf70e296a47
 
 def delete_funding_criteria(funding_criteria):
     try:
@@ -170,15 +134,8 @@ def delete_funding_criteria(funding_criteria):
 
 
 def get_funding_criteria_by_id(funding_criteria_id):
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     return FundingCriteria.query.filter_by(id=funding_criteria_id).first()
-=======
-    return FundingCriteria.query.filter_by(id=funding_criteria_id)
->>>>>>> Authenication
-=======
-    return FundingCriteria.query.filter_by(id=funding_criteria_id)
->>>>>>> 2a3920c54337a2001f2bca813afe1bf70e296a47
 
 
 def get_all_funding_criteria():

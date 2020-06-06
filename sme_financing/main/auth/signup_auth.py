@@ -1,9 +1,5 @@
-import firebase_admin
 from firebase_admin import auth
 from firebase_admin.exceptions import FirebaseError
-
-firebase = firebase_admin.initialize_app()
-
 
 def sign_up_with_email_and_password(email: str, password: str):
     # Retrieve the signup details from a dictionary
