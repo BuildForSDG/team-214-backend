@@ -261,6 +261,7 @@ class LoginDTO:
         },
     )
 
+
 class SignUpDTO:
     signup_api = Namespace("Register", description="User register")
     signup = signup_api.model(
