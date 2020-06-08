@@ -101,6 +101,23 @@ def insert():
             investor_type="Bank",
         )
     )
+    db.session.add(
+        funding_project.FundingProject(
+            number="FP12 2020",
+            title="Funding Project kick ass",
+            description="Yeah the desc is dope",
+            relevance="Yeah it's relevance",
+            objectives="Yeah the objectives are dope",
+            justification="Yeah the justification is dope",
+            work_plan="Yeah the work_plan is dope",
+            status="In Progress",
+            fund_amount=125800,
+            start_date=datetime.strptime("2020-06-04", "%Y-%m-%d").date(),
+            end_date=datetime.strptime("2020-12-04", "%Y-%m-%d").date(),
+            investor_id=1,
+            funding_application_id=1,
+        )
+    )
     db.session.commit()
 
 
