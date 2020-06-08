@@ -22,4 +22,14 @@ class FundingDetail(db.Model):
 
     def __repr__(self):
         """Returns FundingDetail class representation."""
-        return f"<FundingDetail '{self.name}'>"
+        return f"<FundingDetail '{self.title}'>"
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def add_document(self, document):
+        self.documents.append(document)
