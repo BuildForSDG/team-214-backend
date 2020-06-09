@@ -42,3 +42,13 @@ class FundingProject(db.Model):
     def __repr__(self):
         """Returns this class representation."""
         return f"<FundingProject '{self.name} - {self.status}'>"
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def add_funding_detail(self, funding_detail):
+        self.funding_details.append(funding_detail)
