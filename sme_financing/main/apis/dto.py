@@ -233,3 +233,17 @@ class FundingProjectDTO:
             ),
         },
     )
+
+
+class FundingDetailDTO:
+    funding_detail_api = Namespace(
+        "Funding Detail", description="Funding detail related operations"
+    )
+    funding_detail = funding_detail_api.model(
+        "funding_detail",
+        {
+            "title": fields.String(required=True, description="Funding detail title"),
+            "description": fields.String(description="Description of funding detail"),
+            # "funding_project_number": fields.String(required=True),
+        },
+    )
