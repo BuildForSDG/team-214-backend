@@ -34,8 +34,8 @@ class DocumentList(Resource):
     @api.response(HTTPStatus.CREATED, "Document successfully saved")
     @api.response(HTTPStatus.NOT_FOUND, "File not found")
     @api.response(HTTPStatus.BAD_REQUEST, "File empty")
-    @api.response(HTTPStatus.REQUEST_ENTITY_TOO_LARGE, "File exceeds max upload size")
     @api.response(HTTPStatus.NOT_ACCEPTABLE, "File extension not allowed")
+    @api.response(HTTPStatus.REQUEST_ENTITY_TOO_LARGE, "File exceeds max upload size")
     def post(self):
         """Create a new Document."""
         parse_data = parser.parse_args()
