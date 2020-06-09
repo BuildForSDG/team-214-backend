@@ -9,17 +9,17 @@ from ..service.funding_criteria_service import (
     save_funding_criteria,
     update_funding_criteria,
 )
-from .dto import FundingDTO
+from .dto import FundingCriteriaDTO
 
-api = FundingDTO.funding_api
-_funding_criteria = FundingDTO.funding_criteria
-_funding_criteria_display = FundingDTO.funding_criteria_display
+api = FundingCriteriaDTO.funding_criteria_api
+_funding_criteria = FundingCriteriaDTO.funding_criteria
+# _funding_criteria_display = FundingDTO.funding_criteria_display
 
 
 @api.route("/funding_criteria")
 class fundingCriteriaResource(Resource):
     @api.doc("List all funding criteria")
-    @api.marshal_list_with(_funding_criteria_display, envelope="data")
+    @api.marshal_list_with(_funding_criteria, envelope="data")
     def get(self):
         """
         List all funding criteria
@@ -42,7 +42,7 @@ class fundingCriteriaResource(Resource):
 @api.response(HTTPStatus.NOT_FOUND, "Funding criteria  not found")
 class FundingCriteriaById(Resource):
     @api.doc("Get a single funding criteria")
-    @api.marshal_with(_funding_criteria_display)
+    @api.marshal_with(_funding_criteria)
     def get(self, funding_criteria_id):
         """
         Retrieve funding criteria for the given Id

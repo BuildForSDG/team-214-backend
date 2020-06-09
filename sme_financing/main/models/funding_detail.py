@@ -12,7 +12,7 @@ class FundingDetail(db.Model):
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255), nullable=False)
 
-    documents = db.relationship("Document", backref="funding_detail")
+    # documents = db.relationship("Document", backref="funding_detail")
 
     funding_project_id = db.Column(db.Integer, db.ForeignKey("funding_projects.id"))
     # funding_project = db.relationship("FundingProject", backref="funding_details")

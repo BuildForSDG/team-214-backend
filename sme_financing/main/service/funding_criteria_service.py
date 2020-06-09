@@ -5,12 +5,16 @@ from ..models.funding_criteria import FundingCriteria
 from .investor_service import get_investor_by_email, get_investor_by_id
 
 
+def update():
+    db.commit()
+
+
 def commit_changes(new_data):
     """
     This method commits new changes to the funding_criteria model
     """
     db.session.add(new_data)
-    db.session.commit()
+    update()
 
 
 def save_funding_criteria(data):
@@ -18,40 +22,29 @@ def save_funding_criteria(data):
     This method saves the new funding criteria data
     """
 
-    funding_criteria = FundingCriteria(
-        title=data["title"], description=data["description"]
-    )
-    investor = get_investor_by_email(data["investor_email"])
+    investor = get_investor_by_id(data["investor_id"])
     if not investor:
         fund_criteria = FundingCriteria(
-            name=data["name"],
+            title=data["title"],
             description=data["description"],
             investor_id=data["investor_id"],
         )
-    Investor = get_investor_by_id(data["investor_id"])
-    if not Investor:
 
-        response_object = {
-            "status": "error",
-            "message": "Invalid investor!",
-        }
-        return response_object, 409
-    else:
-
-        funding_criteria.investor = investor
-
-        fund_criteria.investor_id = Investor
+        fund_criteria.investor = investor
 
         try:
-            commit_changes(funding_criteria)
+            commit_changes(fund_criteria)
             response_object = {
                 "status": "success",
                 "message": "Funding criteria successfully added!",
             }
             return response_object, 201
         except SQLAlchemyError as error:
-            response_object = {"status": "error", "message": str(error)}
+            response_object = {"status": "failure", "message": str(error)}
             return response_object, 500
+    else:
+        response_object = {"status": "failure", "message": "Invalid investor id"}
+        return response_object, 500
 
 
 def update_funding_criteria(data, funding_criteria):
@@ -65,57 +58,26 @@ def update_funding_criteria(data, funding_criteria):
         funding_criteria.title = data["title"]
     if data.get("description"):
         funding_criteria.description = data["description"]
-    if data.get("investor_email"):
-        # Checking  for a valid investor using the investor_email
-        investor = get_investor_by_email(data["investor_email"])
-        if not investor:
-            response_object = {
-                "status": "fail",
-                "message": "Invalid Investor id!.",
-            }
-            return response_object, 404
-        else:
-            funding_criteria.investor = investor
 
-    try:
-        db.session.commit()
+    investor = get_investor_by_id(id=data["investor_id"])
+    if not investor:
         response_object = {
-            "status": "success",
-            "message": "Successfully updated!",
-        }
-        return response_object, 201
-
-    except SQLAlchemyError as error:
-        response_object = {"status": "error", "message": str(error)}
-        return response_object, 400
-
-    if data.get("name"):
-        funding_criteria.name = data["name"]
-    if data.get("description"):
-        funding_criteria.description = data["description"]
-    if data.get("investor_id"):
-        funding_criteria.investor_id = data["investor_id"]
-
-    # Checking  for a valid investor using the investor id
-    Investor = get_investor_by_id(data["investor_id"])
-    if not Investor:
-        response_object = {
-            "status": "fail",
+            "status": "failure",
             "message": "Invalid Investor id!.",
         }
         return response_object, 404
     else:
+        funding_criteria.investor = investor
         try:
-            db.session.add(funding_criteria)
-            db.session.commit()
+            update()
             response_object = {
                 "status": "success",
-                "message": "Successfully updated!",
+                "message": "Successfully updated.",
             }
             return response_object, 201
-
-        except SQLAlchemyError as error:
-            response_object = {"status": "error", "message": str(error)}
+        except SQLAlchemyError as err:
+            db.session.rollback()
+            response_object = {"status": "error", "message": str(err)}
             return response_object, 400
 
 
@@ -129,6 +91,7 @@ def delete_funding_criteria(funding_criteria):
         }
         return response_object, 204
     except SQLAlchemyError as error:
+        db.session.rollback()
         response_object = {"status": "error", "message": str(error)}
         return response_object, 500
 

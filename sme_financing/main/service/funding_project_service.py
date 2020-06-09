@@ -176,3 +176,7 @@ def get_project_fund_disbursements_by_number(number):
         return response_object, 404
     else:
         return funding_project.fund_disbursements
+
+
+def get_funding_project_by_id(id):
+    return FundingProject.query.filter_by(id=id).first()

@@ -206,7 +206,7 @@ class FundingCriteriaDTO:
     funding_criteria = funding_criteria_api.model(
         "funding_criteria",
         {
-            "name": fields.String(required=True, description="Funding Criteria name"),
+            "title": fields.String(required=True, description="Funding Criteria title"),
             "description": fields.String(
                 required=True, description=" Description of funding criteria"
             ),
@@ -269,5 +269,50 @@ class SignUpDTO:
         {
             "email": fields.String(required=True, description="user email"),
             "password": fields.String(required=True, description="user password"),
+        },
+    )
+
+
+class ResetPasswordDTO:
+    reset_password_api = Namespace("Reset password", description="User password reset")
+    reset_password = reset_password_api.model(
+        "Reset Password",
+        {
+            "password": fields.String(required=True, description="new password"),
+            "confirmpassword": fields.String(
+                required=True, description="confirm new password"
+            ),
+        },
+    )
+
+
+class FundDisbursementDTO:
+    fund_disbursement_api = Namespace("Fund disbursement", description="Disburse funds")
+    fund_disburse = fund_disbursement_api.model(
+        "Disburse fund",
+        {
+            "descriptiom": fields.String(required=True, description="description"),
+            "status": fields.String(required=True, description="status"),
+            "disbursement_date": fields.String(
+                required=True, description="disbursement date"
+            ),
+            "bank_account_details_from": fields.String(
+                required=True, description="bank  account details from"
+            ),
+            "password": fields.String(required=True, description="new password"),
+            "cheque_details": fields.String(
+                required=True, description="cheque details"
+            ),
+        },
+    )
+
+
+class FundDetailDTO:
+    fund_detail_api = Namespace("Fund detail", description="Fund detail")
+    fund_detail = fund_detail_api.model(
+        "fund detail",
+        {
+            "name": fields.String(required=True, description="name"),
+            "description": fields.String(required=True, description="description"),
         },
     )
