@@ -4,6 +4,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from sme_financing.main import db
 
+from ..models.funding_detail import FundingDetail
 from ..models.funding_project import FundingProject
 from .funding_application_service import get_funding_application_by_number
 from .investor_service import get_investor_by_email
@@ -142,8 +143,52 @@ def get_funding_project_by_status(status):
     return FundingProject.query.filter_by(status=status)
 
 
-def get_project_funding_details_by_number(number):
-    funding_project = get_funding_project_by_number(number)
+def create_funding_detail(data, funding_project_number):
+    funding_project = get_funding_project_by_number(funding_project_number)
+    if not funding_project:
+        response_object = {
+            "status": "error",
+            "message": "Funding Project not found.",
+        }
+        return response_object, 404
+
+    funding_detail = FundingDetail(title=data["title"], description=data["description"])
+    funding_project.add_funding_detail(funding_detail)
+    try:
+        funding_project.update()
+        response_object = {
+            "status": "success",
+            "message": "Funding detail successfully added.",
+        }
+        return response_object, 201
+    except SQLAlchemyError as error:
+        response_object = {"status": "error", "message": str(error)}
+        return response_object, 400
+
+
+def remove_funding_detail(funding_project, funding_detail):
+    if funding_detail not in funding_project.funding_details:
+        response_object = {
+            "status": "error",
+            "message": """Funding detail not associated with project""",
+        }
+        return response_object, 400
+    funding_project.funding_details.remove(funding_detail)
+    try:
+        funding_project.update()
+        response_object = {
+            "status": "success",
+            "message": "Successfully removed.",
+        }
+        return response_object, 200
+    except SQLAlchemyError as err:
+        db.session.rollback()
+        response_object = {"status": "error", "message": str(err)}
+        return response_object, 500
+
+
+def get_project_funding_details(funding_project_number):
+    funding_project = get_funding_project_by_number(funding_project_number)
     if not funding_project:
         response_object = {
             "status": "error",
@@ -154,8 +199,8 @@ def get_project_funding_details_by_number(number):
         return funding_project.funding_details
 
 
-def get_project_project_milestones_by_number(number):
-    funding_project = get_funding_project_by_number(number)
+def get_project_project_milestones(funding_project_number):
+    funding_project = get_funding_project_by_number(funding_project_number)
     if not funding_project:
         response_object = {
             "status": "error",
@@ -166,8 +211,8 @@ def get_project_project_milestones_by_number(number):
         return funding_project.project_milestones
 
 
-def get_project_fund_disbursements_by_number(number):
-    funding_project = get_funding_project_by_number(number)
+def get_project_fund_disbursements(funding_project_number):
+    funding_project = get_funding_project_by_number(funding_project_number)
     if not funding_project:
         response_object = {
             "status": "error",
