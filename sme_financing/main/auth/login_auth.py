@@ -11,12 +11,11 @@ rest_api_url = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPa
 
 
 def login_with_email_and_password(data, return_secure_token: bool = True):
-    user_email = data["email"]
 
     payload = json.dumps(
         {
-            "email": user_email,
-            "password": user_password,
+            "email": data["email"],
+            "password": data["password"],
             "returnSecureToken": return_secure_token,
         }
     )
@@ -70,14 +69,18 @@ def forget_password(email: str):
     return response_object, 500
 
 
-def reset_password(data):
-    pass
-
-
-if __name__ == "__main__":
-    data = {"email": "akoladenis97@gmail.com", "password": "buildforsdg"}
-    data_v = login_with_email_and_password(data=data)
-    print(data_v)
-    # print("--------------")
-    # print(verify_user(data_v))
-    # #print(login_with_email_and_password(data=data))
+def reset_password(id, data):
+    new_password = data["password"]
+    confirm_password = data["confirmpassword"]
+    if new_password == confirm_password:
+        try:
+            auth.updata_user(id, password=new_password)
+            response_object = {
+                "status": "success",
+                "message": "password reset successful",
+            }
+            return response_object, 202
+        except FirebaseError as error:
+            response_object = {"status": "failure", "message": str(error)}
+    response_object = {"status": "failure", "message": "Inconsistent password"}
+    return response_object, 503

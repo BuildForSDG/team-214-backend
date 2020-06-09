@@ -269,3 +269,37 @@ class SignUpDTO:
             "password": fields.String(required=True, description="user password"),
         },
     )
+
+
+class ResetPasswordDTO:
+    reset_password_api = Namespace("Reset password", description="User password reset")
+    reset_password = reset_password_api.model(
+        "Reset Password",
+        {
+            "password": fields.String(required=True, description="new password"),
+            "confirmpassword": fields.String(
+                required=True, description="confirm new password"
+            ),
+        },
+    )
+
+
+class FundDisbursementDTO:
+    fund_disbursement_api = Namespace("Fund disbursement", description="Disburse funds")
+    fund_disburse = fund_disbursement_api.model(
+        "Disburse fund",
+        {
+            "descriptiom": fields.String(required=True, description="description"),
+            "status": fields.String(required=True, description="status"),
+            "disbursement_date": fields.String(
+                required=True, description="disbursement date"
+            ),
+            "bank_account_details_from": fields.String(
+                required=True, description="bank  account details from"
+            ),
+            "password": fields.String(required=True, description="new password"),
+            "cheque_details": fields.String(
+                required=True, description="cheque details"
+            ),
+        },
+    )

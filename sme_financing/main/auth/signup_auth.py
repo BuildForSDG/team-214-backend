@@ -14,7 +14,3 @@ def sign_up_with_email_and_password(email: str, password: str):
     except FirebaseError as error:
         response_object = {"status": "error", "message": str(error)}
         return response_object, 500
-
-
-if __name__ == "__main__":
-    print(sign_up_with_email_and_password("akoladenis97@gmail.com", "buildforsdg"))
