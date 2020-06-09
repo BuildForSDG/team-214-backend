@@ -4,7 +4,7 @@ from flask_restx._http import HTTPStatus
 from werkzeug.datastructures import FileStorage
 
 from ..service import funding_detail_service as service
-from .dto import FundingDetailDTO, DocumentDTO
+from .dto import DocumentDTO, FundingDetailDTO
 
 api = FundingDetailDTO.funding_detail_api
 _funding_detail = FundingDetailDTO.funding_detail
@@ -85,6 +85,7 @@ class FundingDetailByID(Resource):
         else:
             data = request.json
             return service.update_funding_detail(data, funding_detail)
+
 
 @api.route("/<int:funding_detail_id>/documents")
 @api.param("funding_detail_id", "The ID of the funding detail to process")
