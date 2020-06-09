@@ -12,7 +12,7 @@ print(env_path)
 class Config(object):
     DEBUG = True
     TESTING = False
-    SQLALCHEMY_ECHO = True
+    SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
@@ -44,9 +44,7 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = os.getenv("DB_URL") or "sqlite:///" + os.path.join(
-        basedir, "test.db"
-    )
+    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "test.db")
     JJWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY") or ""
     SECRET_KEY = os.getenv("SECRET_KEY") or ""
     SECURITY_PASSWORD_SALT = os.getenv("SECURITY_PASSWORD_SALT") or ""

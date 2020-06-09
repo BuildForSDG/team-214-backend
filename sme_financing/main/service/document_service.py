@@ -17,9 +17,13 @@ def allowed_file(content_type):
     return content_type.rsplit("/")[1].lower() in ALLOWED_EXTENSIONS
 
 
+def update():
+    db.session.commit()
+
+
 def commit_changes(data):
     db.session.add(data)
-    db.session.commit()
+    update()
 
 
 def process_file(file):
@@ -31,25 +35,27 @@ def process_file(file):
 
 
 def check_file(filename, file_size, content_type):
+    response_object = {"status": "error"}
     if filename == "":
-        response_object = {"status": "error", "message": "File not found"}
+        response_object["message"] = "File not found"
         return response_object, 404
 
     if file_size == 0:
-        response_object = {"status": "error", "message": "File empty"}
+        response_object["message"] = "File empty"
         return response_object, 404
 
     if file_size > MAX_CONTENT_LENGTH:
-        response_object = {"status": "error", "message": "File exceeds max upload size"}
+        response_object["message"] = "File exceeds max upload size"
         return response_object, 413  # payload too large
 
     if not allowed_file(content_type):
-        response_object = {"status": "error", "message": "File extension not allowed"}
+        response_object["message"] = "File extension not allowed"
         return response_object, 406  # not acceptable
+
     return None
 
 
-def save_document(document_name, file):
+def create_document_instance(document_name, file):
     filename, file_size, content_type = process_file(file)
     check_file(filename, file_size, content_type)
     abs_path = os.path.join(tmpdir, filename)
@@ -66,6 +72,11 @@ def save_document(document_name, file):
         ),
     )
     file.save(abs_path)
+    return new_document
+
+
+def save_document(document_name, file):
+    new_document = create_document_instance(document_name, file)
     try:
         commit_changes(new_document)
         response_object = {
@@ -80,10 +91,6 @@ def save_document(document_name, file):
 
 def get_document(doc_id):
     return Document.query.filter_by(id=doc_id).first()
-
-
-def update():
-    db.session.commit()
 
 
 def edit_document(document, document_name, file):
@@ -109,7 +116,7 @@ def edit_document(document, document_name, file):
     }
     try:
         # document.update()
-        db.session.commit()
+        update()
         return response_object, 201
     except SQLAlchemyError as err:
         db.session.rollback()
@@ -121,7 +128,7 @@ def delete_document(document):
     # document.delete()
     try:
         db.session.delete(document)
-        db.session.commit()
+        update()
         response_object = {
             "status": "success",
             "message": "Successfully deleted.",

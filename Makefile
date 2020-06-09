@@ -19,6 +19,9 @@ all-db: init-db upgrade-db insert
 tests:
 	poetry run pytest --disable-warnings
 
+test-all:
+	pytest --disable-warnings -v
+
 run:
 	python manage.py run
 

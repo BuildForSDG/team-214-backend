@@ -9,8 +9,8 @@ class FundingDetail(db.Model):
     __tablename__ = "funding_details"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(255), nullable=False)
-    description = db.Column(db.String(255), nullable=False)
+    title = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.String(255), nullable=True)
 
     documents = db.relationship("Document", backref="funding_detail")
 
@@ -22,4 +22,14 @@ class FundingDetail(db.Model):
 
     def __repr__(self):
         """Returns FundingDetail class representation."""
-        return f"<FundingDetail '{self.name}'>"
+        return f"<FundingDetail '{self.title}'>"
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def add_document(self, document):
+        self.documents.append(document)
