@@ -10,35 +10,37 @@ print(env_path)
 
 
 class Config(object):
-    DEBUG = True
-    TESTING = False
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    DB_USER = os.getenv("DB_USER")
+    DB_PASS = os.getenv("DB_PASS")
+    DB_NAME = os.getenv("DB_NAME")
 
 
 class CloudConfig(Config):
-    db_user = os.environ.get("DB_USER")
-    db_pass = os.environ.get("DB_PASS")
-    db_name = os.environ.get("DB_NAME")
-    cloud_sql_connection_name = os.environ.get("CLOUD_SQL_CONN_NAME")
+    cloud_sql_connection_name = os.getenv("CLOUD_SQL_CONN_NAME")
     socket = f"unix_socket=/cloudsql/{cloud_sql_connection_name}"
-    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{db_user}:{db_pass}@/{db_name}?{socket}"
+    SQLALCHEMY_DATABASE_URI = (
+        f"mysql+pymysql://{Config.DB_USER}:{Config.DB_PASS}@/{Config.DB_NAME}?{socket}"
+    )
 
 
 class ProductionConfig(Config):
-    DEBUG = False
-    SQLALCHEMY_DATABASE_URI = os.getenv("DB_URL") or "sqlite:///" + os.path.join(
-        basedir, "prod.db"
+    DB_HOST = os.getenv("DB_HOST")
+    SQLALCHEMY_DATABASE_URI = (
+        f"mysql+pymysql://{Config.DB_USER}:{Config.DB_PASS}@{DB_HOST}/{Config.DB_NAME}"
     )
-    SQLALCHEMY_ECHO = False
+    SECURITY_PASSWORD_SALT = os.getenv("SECURITY_PASSWORD_SALT") or ""
     JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY") or ""
     SECRET_KEY = os.getenv("SECRET_KEY") or ""
-    SECURITY_PASSWORD_SALT = os.getenv("SECURITY_PASSWORD_SALT") or ""
 
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "dev.db")
+    DB_HOST = os.getenv("DB_HOST")
+    SQLALCHEMY_DATABASE_URI = (
+        f"mysql+pymysql://{Config.DB_USER}:{Config.DB_PASS}@{DB_HOST}/{Config.DB_NAME}"
+    )
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 

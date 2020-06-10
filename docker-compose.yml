@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+   db:
+     image: mysql:5.7
+     command: --default-authentication-plugin=mysql_native_password
+     restart: always
+     volumes:
+      - db_volume:/var/lib/mysql
+     environment:
+       MYSQL_USER: financeup
+       MYSQL_PASSWORD: financeup
+       MYSQL_ROOT_PASSWORD: financeup
+       MYSQL_DATABASE: financeup
+     ports:
+      - "3309:3306"
+     expose:
+      - "3306"
+
+   web:
+    container_name: financeup-api
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    restart: always
+    environment:
+      DB_HOST: db:3306
+      DB_USER: financeup
+      DB_PASS: financeup
+      DB_NAME: financeup
+      PORT: 8000
+    links:
+     - db
+    ports:
+     - "8000:8000"
+    depends_on:
+     - db
+
+volumes:
+    db_volume: {}

@@ -23,7 +23,7 @@ from sme_financing.main.models import (
     user,
 )
 
-app = create_app(os.getenv("FLASK_ENV") or "development")
+app = create_app(os.getenv("FLASK_ENV") or "default")
 
 app.register_blueprint(api_v1)
 
@@ -125,12 +125,6 @@ def insert():
 def run():
     """Runs app from the command line."""
     app.run()
-
-
-# @manager.command
-# def run_container():
-#     """Runs app on port PORT from the command line."""
-#     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
 
 
 @manager.command
