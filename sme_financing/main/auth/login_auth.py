@@ -25,10 +25,7 @@ def login_with_email_and_password(data, return_secure_token: bool = True):
 
 def verify_user(token):
     """
-    Verifies the signature and data for the provided JWT.
-    Accepts a signed token string, verifies that it is current, and issued to this project,
-    and that it was correctly signed by Google
-    """
+    Verifies the signature and data for the provided JWT. """
     if len(token) > 1:
         # if a token is generated,the length of the token dict will be greater than 1
 

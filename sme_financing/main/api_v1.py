@@ -6,7 +6,6 @@ from .apis.document_api import api as document_ns
 from .apis.fund_disbursement_api import api as disburse_ns
 from .apis.funding_application_api import api as funding_ns
 from .apis.funding_criteria_api import api as funding_criteria_ns
-from .apis.funding_detail_api import api as fund_detail_ns
 from .apis.funding_project_api import api as funding_project_ns
 from .apis.investor_api import api as investor_ns
 from .apis.login_api import api as login_ns
@@ -36,4 +35,4 @@ rest_api.add_namespace(login_ns, path="/login")
 rest_api.add_namespace(signup_ns, path="/register")
 rest_api.add_namespace(reset_ns, path="/reset")
 rest_api.add_namespace(disburse_ns, path="/disburse")
-#rest_api.add_namespace(fund_detail_ns, path="/fund-detail")
+# rest_api.add_namespace(fund_detail_ns, path="/fund-detail")

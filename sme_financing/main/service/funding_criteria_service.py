@@ -2,7 +2,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from .. import db
 from ..models.funding_criteria import FundingCriteria
-from .investor_service import get_investor_by_email, get_investor_by_id
+from .investor_service import get_investor_by_id
 
 
 def update():
