@@ -1,11 +1,9 @@
-import os
 import unittest
 
 from flask import current_app
 from flask_testing import TestCase
 
 from manage import app
-from sme_financing.main.config import basedir
 
 
 class TestDevelopmentConfig(TestCase):
@@ -16,10 +14,7 @@ class TestDevelopmentConfig(TestCase):
     def test_app_is_development(self):
         self.assertTrue(app.config["DEBUG"] is True)
         self.assertFalse(current_app is None)
-        self.assertTrue(
-            app.config["SQLALCHEMY_DATABASE_URI"]
-            == "sqlite:///" + os.path.join(basedir, "dev.db")
-        )
+        self.assertIsNotNone(app.config["SQLALCHEMY_DATABASE_URI"])
 
 
 class TestTestingConfig(TestCase):
@@ -38,6 +33,7 @@ class TestProductionConfig(TestCase):
 
     def test_app_is_production(self):
         self.assertTrue(app.config["DEBUG"] is False)
+        self.assertIsNotNone(app.config["SQLALCHEMY_DATABASE_URI"])
 
 
 if __name__ == "__main__":

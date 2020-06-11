@@ -26,6 +26,7 @@ class CloudConfig(Config):
 
 
 class ProductionConfig(Config):
+    DEBUG = False
     DB_HOST = os.getenv("DB_HOST")
     SQLALCHEMY_DATABASE_URI = (
         f"mysql+pymysql://{Config.DB_USER}:{Config.DB_PASS}@{DB_HOST}/{Config.DB_NAME}"
