@@ -223,5 +223,5 @@ def get_project_fund_disbursements(funding_project_number):
         return funding_project.fund_disbursements
 
 
-def get_funding_project_by_id(id):
-    return FundingProject.query.filter_by(id=id).first()
+def get_funding_project_by_id(funding_project_id):
+    return FundingProject.query.filter_by(id=funding_project_id).first()

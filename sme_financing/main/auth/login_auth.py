@@ -69,12 +69,12 @@ def forget_password(email: str):
     return response_object, 500
 
 
-def reset_password(id, data):
+def reset_password(user_id, data):
     new_password = data["password"]
     confirm_password = data["confirmpassword"]
     if new_password == confirm_password:
         try:
-            auth.updata_user(id, password=new_password)
+            auth.updata_user(id=user_id, password=new_password)
             response_object = {
                 "status": "success",
                 "message": "password reset successful",

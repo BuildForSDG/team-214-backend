@@ -41,11 +41,11 @@ class fundDisbursementResource(Resource):
 class FundDisbursementById(Resource):
     @api.doc("Get a single fund disbursement")
     @api.marshal_with(_fund_disbursement)
-    def get(self, fund_disbursement_id):
+    def get(self, id):
         """
         Retrieve funding disbursement for the given Id
         """
-        fund_disburse = get_fund_disbursement_by_id(id=fund_disbursement_id)
+        fund_disburse = get_fund_disbursement_by_id(fund_disbursement_id=id)
 
         if not fund_disburse:
             self.api.abort(
@@ -56,11 +56,11 @@ class FundDisbursementById(Resource):
 
     @api.doc("Delete fund disbursement")
     @api.response(HTTPStatus.BAD_REQUEST, "Can't delete the fund disbursement")
-    def delete(self, fund_disbursement_id):
+    def delete(self, id):
         """
         Delete the fund disbursement  by the given Id to delete it
         """
-        fund_disbursement = get_fund_disbursement_by_id(id=fund_disbursement_id)
+        fund_disbursement = get_fund_disbursement_by_id(fund_disbursement_id=id)
         if not fund_disbursement:
             self.api.abort(
                 code=HTTPStatus.NOT_FOUND, message="Funding disbursement not found"
@@ -73,10 +73,10 @@ class FundDisbursementById(Resource):
     @api.response(HTTPStatus.CREATED, "Fund disbursement successfully updated")
     @api.response(HTTPStatus.BAD_REQUEST, "Can't update the fund disbursement")
     @api.response(HTTPStatus.NOT_FOUND, "funding_project  specified doesn't exist")
-    def patch(self, fund_disbursement_id):
+    def patch(self, id):
         """Update a Funding disbursement."""
-        fund_disbursement = get_fund_disbursement_by_id(id=fund_disbursement_id)
-        if not fund_disbursement_id:
+        fund_disbursement = get_fund_disbursement_by_id(fund_disbursement_id=id)
+        if not id:
             self.api.abort(
                 code=HTTPStatus.NOT_FOUND, message="Fund disbursement not found"
             )
