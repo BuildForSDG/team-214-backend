@@ -52,11 +52,11 @@ def drop_all():
     db.Model.metadata.reflect(bind=db.engine, schema=db_name)
 
     class AlembicTable(db.Model):
-        """deal with an existing table"""
+        """alembic_version table"""
 
         __table__ = db.Model.metadata.tables[f"{db_name}.alembic_version"]
 
-    db.drop_all()
+    AlembicTable.__table__.drop(db.engine)
 
 
 @manager.command
