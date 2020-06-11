@@ -35,10 +35,24 @@ migrate = Migrate(app, db)
 
 manager.add_command("db", MigrateCommand)
 
+db_name = os.getenv("DB_NAME")
 
 @app.before_first_request
 def create_tables():
     db.create_all()
+
+
+@manager.command
+def drop_all():
+    db.session.remove()
+    db.drop_all()
+    # alembic_version is not part of the db.metadata
+    # solved the problem with reflection
+    db.Model.metadata.reflect(bind=db.engine,schema=db_name)
+    class AlembicTable(db.Model):
+        """deal with an existing table"""
+        __table__ = db.Model.metadata.tables[f'{db_name}.alembic_version']
+    db.drop_all()
 
 
 @manager.command

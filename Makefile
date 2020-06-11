@@ -7,14 +7,19 @@ clean:
 insert:
 	python manage.py insert
 
-upgrade-db:
+migrate-db:
 	python manage.py db migrate
+
+upgrade-db:
 	python manage.py db upgrade
 
 init-db:
 	python manage.py db init
 
-all-db: init-db upgrade-db insert
+all-db: init-db migrate-db upgrade-db insert
+
+drop-all:
+	python manage.py drop_all
 
 tests:
 	poetry run pytest --disable-warnings
