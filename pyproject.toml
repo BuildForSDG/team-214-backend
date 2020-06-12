@@ -18,6 +18,12 @@ pyjwt = "^1.7.1"
 flask-restx = "^0.2.0"
 python-dotenv = "^0.13.0"
 pymysql = "^0.9.3"
+wheel = "^0.34.2"
+firebase-admin = "^4.3.0"
+# grpcio = "^1.29.0"
+# google-cloud-storage = "^1.28.1"
+# setuptools = "^47.1.1"
+# gcloud = "^0.18.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

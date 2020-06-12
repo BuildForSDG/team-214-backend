@@ -44,7 +44,6 @@ def save_funding_criteria(data):
 def update_funding_criteria(data, funding_criteria):
     """
     This method updates the funding criteria data in the database
-
     """
     # checking for the updated field
     if data.get("title"):
