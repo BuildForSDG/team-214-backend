@@ -2,16 +2,18 @@
 **/**/.pyc
 .DS_Store
 .env
+*.db
 
 # DIRECTORIES
 **/**/__pycache__
 .vscode/
 .pytest_cache
-migrations
-*.db
+.github
+.git*
+.gcloudignore
 sme_financing.egg-info
 
-Dockerfile
+cloudbuild.yaml
 README.md
 *.pyc
 *.pyo
