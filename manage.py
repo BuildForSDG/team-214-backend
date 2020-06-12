@@ -23,7 +23,7 @@ from sme_financing.main.models import (
     user,
 )
 
-app = create_app(os.getenv("FLASK_ENV") or "development")
+app = create_app(os.getenv("FLASK_ENV") or "default")
 
 app.register_blueprint(api_v1)
 
@@ -35,10 +35,28 @@ migrate = Migrate(app, db)
 
 manager.add_command("db", MigrateCommand)
 
+db_name = os.getenv("DB_NAME")
+
 
 @app.before_first_request
 def create_tables():
     db.create_all()
+
+
+@manager.command
+def drop_all():
+    db.session.remove()
+    db.drop_all()
+    # alembic_version is not part of the db.metadata
+    # solved the problem with reflection
+    db.Model.metadata.reflect(bind=db.engine, schema=db_name)
+
+    class AlembicTable(db.Model):
+        """alembic_version table"""
+
+        __table__ = db.Model.metadata.tables[f"{db_name}.alembic_version"]
+
+    AlembicTable.__table__.drop(db.engine)
 
 
 @manager.command
@@ -125,12 +143,6 @@ def insert():
 def run():
     """Runs app from the command line."""
     app.run()
-
-
-# @manager.command
-# def run_container():
-#     """Runs app on port PORT from the command line."""
-#     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
 
 
 @manager.command
