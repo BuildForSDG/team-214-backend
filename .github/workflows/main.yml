@@ -79,11 +79,8 @@ jobs:
         # mysql root password: ${{ secrets.RootPassword }}
         mysql user: 'developer'
         mysql password: 'cimysqldbusertest'
-      env:
-        DB_HOST: 127.0.0.1:3306
-        DB_USER: developer
-        DB_PASS: cimysqldbusertest
-        DB_NAME: smefinancing
+ 
+      run: echo Hello world $DB_HOST $DB_USER $DB_PASS $DB_NAME
 
     - name: Run Tests
       run: |
