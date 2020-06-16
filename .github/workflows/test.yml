@@ -1,4 +1,4 @@
-name: CITest
+name: Pytest CI
 
 on:
   push:
@@ -33,7 +33,7 @@ on:
     branches: [ master, develop ]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     strategy:
       matrix:

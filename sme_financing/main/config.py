@@ -46,6 +46,7 @@ class TestingConfig(Config):
     TESTING = True
     DB_HOST = os.getenv("DB_HOST")
     SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{Config.DB_USER}:{Config.DB_PASS}@{DB_HOST}/{Config.DB_NAME}?charset=utf8mb4"
+    print(SQLALCHEMY_DATABASE_URI)
     JJWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY") or ""
     SECRET_KEY = os.getenv("SECRET_KEY") or ""
     SECURITY_PASSWORD_SALT = os.getenv("SECURITY_PASSWORD_SALT") or ""

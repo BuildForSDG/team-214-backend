@@ -83,7 +83,7 @@ jobs:
 
     - name: Setup test env
       run: |
-        export DB_HOST=127.0.0.1:3306
+        export DB_HOST=localhost
         export DB_USER=root
         export DB_PASS=cimysqldbusertest
         export DB_NAME=smefinancing
