@@ -76,8 +76,6 @@ jobs:
         mysql user: 'developer'
         mysql password: 'cimysqldbusertest'
 
-      run: echo Hello world $DB_HOST $DB_USER $DB_PASS $DB_NAME
-
     - name: Run Tests
       run: |
         pytest

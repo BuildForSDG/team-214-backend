@@ -39,6 +39,7 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: ['3.7', '3.8']
+
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v2
@@ -57,6 +58,7 @@ jobs:
         source $HOME/.poetry/env
         poetry export -f requirements.txt -o requirements.txt --dev
         pip install -r requirements.txt
+        echo $DB_HOST $DB_USER $DB_PASS $DB_NAME
 
     - name: Check python imports with isort
       run: |
@@ -79,8 +81,6 @@ jobs:
         # mysql root password: ${{ secrets.RootPassword }}
         mysql user: 'developer'
         mysql password: 'cimysqldbusertest'
- 
-      run: echo Hello world $DB_HOST $DB_USER $DB_PASS $DB_NAME
 
     - name: Run Tests
       run: |
