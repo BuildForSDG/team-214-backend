@@ -72,14 +72,17 @@ jobs:
     # - name: Shutdown Default MySQL
     #   run: sudo service mysql stop
 
-    - name: Set up MySQL
-      uses: mirromutth/mysql-action@v1.1
-      with:
-        mysql version: '8.0'
-        mysql database: 'smefinancing'
-        # mysql root password: ${{ secrets.RootPassword }}
-        # mysql user: 'developer'
-        mysql root password: 'cimysqldbusertest'
+    - name: Create DB
+      run: mysql -uroot -proot -e "CREATE DATABASE smefinancing;"
+
+    # - name: Set up MySQL
+    #   uses: mirromutth/mysql-action@v1.1
+    #   with:
+    #     mysql version: '8.0'
+    #     mysql database: 'smefinancing'
+    #     # mysql root password: ${{ secrets.RootPassword }}
+    #     # mysql user: 'developer'
+    #     mysql root password: 'cimysqldbusertest'
 
     - name: Run Tests
       run: |
