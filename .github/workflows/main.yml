@@ -81,16 +81,8 @@ jobs:
         # mysql user: 'developer'
         mysql root password: 'cimysqldbusertest'
 
-    - name: Setup test env
-      run: |
-        export DB_HOST=localhost
-        export DB_USER=root
-        export DB_PASS=cimysqldbusertest
-        export DB_NAME=smefinancing
-
-    - name : Check env vars
-      run: echo $DB_HOST $DB_USER $DB_PASS $DB_NAME
-
     - name: Run Tests
       run: |
+        mv .env.testing .env
+        cat .env
         pytest
