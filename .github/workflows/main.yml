@@ -38,7 +38,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: ['3.7', '3.8']
+        python-version: ['3.7']
 
     steps:
     - name: Checkout Repo
@@ -80,8 +80,8 @@ jobs:
         mysql version: '8.0'
         mysql database: 'smefinancing'
         # mysql root password: ${{ secrets.RootPassword }}
-        mysql user: 'developer'
-        mysql password: 'cimysqldbusertest'
+        # mysql user: 'developer'
+        mysql root password: 'cimysqldbusertest'
 
     - name: Run Tests
       run: |
