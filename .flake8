@@ -1,6 +1,6 @@
 [flake8]
 per-file-ignores = manage.py: F401
-max-line-length=88
+max-line-length = 88
 
 exclude =
   .pytest_cache
@@ -9,6 +9,7 @@ exclude =
   **/**/__pycache__
   *.pyc
   .git
+  config.py
   setup.py
   build
   dist
@@ -17,8 +18,7 @@ exclude =
   .tox
   .vscode
   .github
-  tests/fixtures/
-  tests/utils/fixtures/
+  tests/
   migrations
 
 max-complexity = 10

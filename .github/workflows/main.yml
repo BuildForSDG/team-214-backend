@@ -40,28 +40,51 @@ jobs:
       matrix:
         python-version: ['3.7', '3.8']
     steps:
-    - uses: actions/checkout@v1
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
         architecture: x64
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install setuptools wheel twine
         curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
         source $HOME/.poetry/env
-        poetry export -f requirements.txt -o requirements.txt --dev
+        poetry export -f requirements.txt -o requirements.txt
         pip install -r requirements.txt
+
     - name: Check python imports with isort
       run: |
         isort --version-number
         isort -rc --check-only --quiet .
+
     - name: Lint with flake8
       run: |
         flake8 --version
         flake8
+
+    - name: Shutdown Default MySQL
+      run: sudo service mysql stop
+
+    - name: Set up MySQL
+      uses: mirromutth/mysql-action@v1.1
+      with:
+        mysql version: '8.0'
+        mysql database: 'smefinancing'
+        # mysql root password: ${{ secrets.RootPassword }}
+        mysql user: 'developer'
+        mysql password: 'cimysqldbusertest'
+      env:
+        DB_HOST: localhost
+        DB_USER: developer
+        DB_PASS: cimysqldbusertest
+        DB_NAME: smefinancing
+
     - name: Run Tests
       run: |
         pytest

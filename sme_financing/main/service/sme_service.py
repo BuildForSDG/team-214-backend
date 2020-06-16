@@ -63,8 +63,6 @@ def save_sme(data):
 def set_sme(data, sme):
     if data.get("name"):
         sme.name = data["name"]
-    if data.get("postal_address"):
-        sme.postal_address = data["postal_address"]
     if data.get("location"):
         sme.location = data["location"]
     if data.get("telephone"):
@@ -77,16 +75,6 @@ def set_sme(data, sme):
         sme.sector = data["sector"]
     if data.get("principal_product_service"):
         sme.principal_product_service = data["principal_product_service"]
-    if data.get("other_product_service"):
-        sme.other_product_service = data["other_product_service"]
-    if data.get("age"):
-        sme.age = data["age"]
-    if data.get("establishment_date"):
-        sme.establishment_date = (
-            datetime.strptime(data["establishment_date"], "%Y-%m-%d").date(),
-        )
-    if data.get("ownership_type"):
-        sme.ownership_type = data["ownership_type"]
     if data.get("bank_account_details"):
         sme.bank_account_details = data["bank_account_details"]
     if data.get("employees_number"):

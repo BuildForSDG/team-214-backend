@@ -6,7 +6,6 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 env_path = os.path.join(basedir, "../../.env")
 load_dotenv(dotenv_path=env_path)
-print(env_path)
 
 
 class Config(object):
@@ -38,14 +37,15 @@ class ProductionConfig(Config):
 class DevelopmentConfig(Config):
     DEBUG = True
     FLASK_ENV = "development"
-    DB_HOST = os.getenv("DB_HOST")
-    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{Config.DB_USER}:{Config.DB_PASS}@{DB_HOST}/{Config.DB_NAME}?charset=utf8mb4"
+    # SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{Config.DB_USER}:{Config.DB_PASS}@{DB_HOST}/{Config.DB_NAME}?charset=utf8mb4"
+    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "dev.db")
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 
 class TestingConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "test.db")
+    DB_HOST = os.getenv("DB_HOST")
+    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{Config.DB_USER}:{Config.DB_PASS}@{DB_HOST}/{Config.DB_NAME}?charset=utf8mb4"
     JJWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY") or ""
     SECRET_KEY = os.getenv("SECRET_KEY") or ""
     SECURITY_PASSWORD_SALT = os.getenv("SECURITY_PASSWORD_SALT") or ""
