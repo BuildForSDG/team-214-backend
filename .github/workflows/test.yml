@@ -1,4 +1,4 @@
-name: CI
+name: CITest
 
 on:
   push:
@@ -75,6 +75,8 @@ jobs:
         # mysql root password: ${{ secrets.RootPassword }}
         mysql user: 'developer'
         mysql password: 'cimysqldbusertest'
+
+      run: echo Hello world $DB_HOST $DB_USER $DB_PASS $DB_NAME
 
     - name: Run Tests
       run: |

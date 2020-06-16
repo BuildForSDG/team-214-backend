@@ -80,7 +80,7 @@ jobs:
         mysql user: 'developer'
         mysql password: 'cimysqldbusertest'
       env:
-        DB_HOST: localhost
+        DB_HOST: 127.0.0.1:3306
         DB_USER: developer
         DB_PASS: cimysqldbusertest
         DB_NAME: smefinancing
