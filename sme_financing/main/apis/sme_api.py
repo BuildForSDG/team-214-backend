@@ -4,7 +4,13 @@ from flask import request
 from flask_restx import Resource
 from flask_restx._http import HTTPStatus
 
-from ..service.sme_service import delete_sme, get_all_smes, get_sme_by_id, save_sme
+from ..service.sme_service import (
+    delete_sme,
+    get_all_smes,
+    get_sme_by_id,
+    save_sme,
+    update_sme,
+)
 from .dto import SMEDTO, DocumentDTO
 
 api = SMEDTO.sme_api
@@ -53,6 +59,19 @@ class SMEByID(Resource):
             self.api.abort(code=HTTPStatus.NOT_FOUND, message="SME not found")
         else:
             return delete_sme(sme)
+
+    @api.doc("Update a SME")
+    @api.expect(_sme)
+    @api.response(HTTPStatus.CREATED, "SME successfully updated")
+    @api.response(HTTPStatus.BAD_REQUEST, "Can't update the SME")
+    def patch(self, sme_id):
+        """Update an SME."""
+        sme = get_sme_by_id(sme_id)
+        if not sme:
+            self.api.abort(code=HTTPStatus.NOT_FOUND, message="SME not found")
+        else:
+            data = request.json
+            return update_sme(data, sme)
 
 
 @api.route("/<int:sme_id>/documents")

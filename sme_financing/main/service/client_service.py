@@ -37,7 +37,7 @@ def save_client(data):
         return response_object, 201  # success & resource created
     else:
         response_object = {
-            "status": "fail",
+            "status": "error",
             "message": "Client/User already exists. Please Log in.",
         }
         return response_object, 409  # conflict with current state

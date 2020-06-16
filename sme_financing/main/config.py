@@ -18,6 +18,7 @@ class Config(object):
 
 
 class CloudConfig(Config):
+    FLASK_ENV = "production"
     cloud_sql_connection_name = os.getenv("CLOUD_SQL_CONN_NAME")
     socket = f"unix_socket=/cloudsql/{cloud_sql_connection_name}"
     SQLALCHEMY_DATABASE_URI = (
@@ -26,11 +27,9 @@ class CloudConfig(Config):
 
 
 class ProductionConfig(Config):
-    DEBUG = False
+    FLASK_ENV = "production"
     DB_HOST = os.getenv("DB_HOST")
-    SQLALCHEMY_DATABASE_URI = (
-        f"mysql+pymysql://{Config.DB_USER}:{Config.DB_PASS}@{DB_HOST}/{Config.DB_NAME}"
-    )
+    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{Config.DB_USER}:{Config.DB_PASS}@{DB_HOST}/{Config.DB_NAME}?charset=utf8mb4"
     SECURITY_PASSWORD_SALT = os.getenv("SECURITY_PASSWORD_SALT") or ""
     JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY") or ""
     SECRET_KEY = os.getenv("SECRET_KEY") or ""
@@ -38,10 +37,9 @@ class ProductionConfig(Config):
 
 class DevelopmentConfig(Config):
     DEBUG = True
+    FLASK_ENV = "development"
     DB_HOST = os.getenv("DB_HOST")
-    SQLALCHEMY_DATABASE_URI = (
-        f"mysql+pymysql://{Config.DB_USER}:{Config.DB_PASS}@{DB_HOST}/{Config.DB_NAME}"
-    )
+    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{Config.DB_USER}:{Config.DB_PASS}@{DB_HOST}/{Config.DB_NAME}?charset=utf8mb4"
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 

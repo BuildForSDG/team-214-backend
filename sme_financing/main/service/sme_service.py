@@ -9,9 +9,13 @@ from .client_service import get_client_by_email
 # from .document_service import get_all_sme_documents
 
 
+def update():
+    db.session.commit()
+
+
 def commit_changes(data):
     db.session.add(data)
-    db.session.commit()
+    update()
 
 
 def save_sme(data):
@@ -56,6 +60,55 @@ def save_sme(data):
             return response_object, 500
 
 
+def set_sme(data, sme):
+    if data.get("name"):
+        sme.name = data["name"]
+    if data.get("postal_address"):
+        sme.postal_address = data["postal_address"]
+    if data.get("location"):
+        sme.location = data["location"]
+    if data.get("telephone"):
+        sme.telephone = data["telephone"]
+    if data.get("email"):
+        sme.email = data["email"]
+    if data.get("description"):
+        sme.description = data["description"]
+    if data.get("sector"):
+        sme.sector = data["sector"]
+    if data.get("principal_product_service"):
+        sme.principal_product_service = data["principal_product_service"]
+    if data.get("other_product_service"):
+        sme.other_product_service = data["other_product_service"]
+    if data.get("age"):
+        sme.age = data["age"]
+    if data.get("establishment_date"):
+        sme.establishment_date = (
+            datetime.strptime(data["establishment_date"], "%Y-%m-%d").date(),
+        )
+    if data.get("ownership_type"):
+        sme.ownership_type = data["ownership_type"]
+    if data.get("bank_account_details"):
+        sme.bank_account_details = data["bank_account_details"]
+    if data.get("employees_number"):
+        sme.employees_number = data["employees_number"]
+
+
+def update_sme(data, sme):
+    set_sme(data, sme)
+    try:
+        commit_changes(sme)
+        response_object = {
+            "status": "success",
+            "message": "SME successfully updated.",
+        }
+        return response_object, 201
+    except SQLAlchemyError as err:
+        db.session.rollback()
+        print(str(err))
+        response_object = {"status": "error", "message": str(err)}
+        return response_object, 400
+
+
 def delete_sme(sme):
     # sme.delete()
     try:
@@ -65,7 +118,7 @@ def delete_sme(sme):
             "status": "success",
             "message": "SME successfully deleted.",
         }
-        return response_object, 204
+        return response_object, 200
     except SQLAlchemyError as e:
         db.session.rollback()
         response_object = {"status": "error", "message": str(e)}

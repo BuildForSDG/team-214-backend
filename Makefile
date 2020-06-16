@@ -21,11 +21,8 @@ all-db: init-db migrate-db upgrade-db insert
 drop-all:
 	python manage.py drop_all
 
-tests:
-	poetry run pytest --disable-warnings
-
-test-all:
-	pytest --disable-warnings -v
+test:
+	pytest -v
 
 run:
 	python manage.py run
