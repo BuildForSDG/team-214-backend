@@ -69,8 +69,8 @@ jobs:
         flake8 --version
         flake8
 
-    # - name: Shutdown Default MySQL
-    #   run: sudo service mysql stop
+    - name: Start Default MySQL
+      run: sudo service mysql start
 
     - name: Create DB
       run: mysql -uroot -proot -e "CREATE DATABASE smefinancing;"
