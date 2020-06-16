@@ -83,6 +83,12 @@ jobs:
         # mysql user: 'developer'
         mysql root password: 'cimysqldbusertest'
 
+    - name: Setup test env
+      run: |
+        export DB_HOST=127.0.0.1:3306
+        export DB_USER=root
+        export DB_PASS=cimysqldbusertest
+        export DB_NAME=smefinancing
     - name: Run Tests
       run: |
         pytest
