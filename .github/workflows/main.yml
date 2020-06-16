@@ -69,11 +69,9 @@ jobs:
         flake8 --version
         flake8
 
-    - name: Shutdown Default MySQL
-      run: sudo service mysql stop
+    # - name: Shutdown Default MySQL
+    #   run: sudo service mysql stop
 
-    - name : Check env vars
-      run: echo $DB_HOST $DB_USER $DB_PASS $DB_NAME
     - name: Set up MySQL
       uses: mirromutth/mysql-action@v1.1
       with:
@@ -89,6 +87,10 @@ jobs:
         export DB_USER=root
         export DB_PASS=cimysqldbusertest
         export DB_NAME=smefinancing
+
+    - name : Check env vars
+      run: echo $DB_HOST $DB_USER $DB_PASS $DB_NAME
+
     - name: Run Tests
       run: |
         pytest
