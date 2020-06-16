@@ -48,7 +48,7 @@ def test_success_delete_sme(test_client, init_db):
 
 def test_success_patch_sme(test_client, init_db):
     payload["email"] = "newsme@email.com"
-    payload["establishment_date"] = "2020-01-11"
+    payload["sector"] = "Agriculture"
     res = test_client.patch(baseURL+ "1", headers=headers, data=json.dumps(payload))
     assert res.status_code == 201
     assert "success" in res.get_data(as_text=True)
@@ -59,7 +59,7 @@ def test_success_get_sme_by_id(test_client, init_db):
     assert res.status_code == 200
     data = json.loads(res.data)
     assert data["email"] == "newsme@email.com"
-    assert data["establishment_date"] == "2020-01-11"
+    assert data["sector"] == "Agriculture"
 
 
 def test_success_get_list_sme(test_client, init_db):

@@ -15,7 +15,6 @@ on:
     - '.gitmodules'
     - '.gitattributes'
     - '.editorconfig'
-    # branches: [ master, develop ]
   pull_request:
     paths-ignore:
     - 'docs/**'
@@ -38,16 +37,10 @@ jobs:
     strategy:
       matrix:
         python-version: ['3.7', '3.8']
-      env:
-        DB_HOST: localhost
-        DB_USER: developer
-        DB_PASS: cimysqldbusertest
-        DB_NAME: smefinancing
 
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v2
-      run: Checked $GITHUB_REF
 
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
@@ -64,18 +57,14 @@ jobs:
         poetry export -f requirements.txt -o requirements.txt
         pip install -r requirements.txt
 
-    - name: Shutdown Default MySQL
-      run: sudo service mysql stop
+    - name: Start MySQL Server
+      run: sudo systemctl start mysql.service
 
-    - name: Set up MySQL
-      uses: mirromutth/mysql-action@v1.1
-      with:
-        mysql version: '8.0'
-        mysql database: 'smefinancing'
-        # mysql root password: ${{ secrets.RootPassword }}
-        mysql user: 'developer'
-        mysql password: 'cimysqldbusertest'
+    - name: Create DB
+      run: mysql -uroot -proot -e "CREATE DATABASE smefinancing;"
 
     - name: Run Tests
       run: |
+        mv .env.testing .env
+        cat .env
         pytest
