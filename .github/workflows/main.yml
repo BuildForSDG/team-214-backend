@@ -58,7 +58,6 @@ jobs:
         source $HOME/.poetry/env
         poetry export -f requirements.txt -o requirements.txt --dev
         pip install -r requirements.txt
-        echo $DB_HOST $DB_USER $DB_PASS $DB_NAME
 
     - name: Check python imports with isort
       run: |
@@ -73,6 +72,8 @@ jobs:
     - name: Shutdown Default MySQL
       run: sudo service mysql stop
 
+    - name : Check env vars
+      run: echo $DB_HOST $DB_USER $DB_PASS $DB_NAME
     - name: Set up MySQL
       uses: mirromutth/mysql-action@v1.1
       with:
