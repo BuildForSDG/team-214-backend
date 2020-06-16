@@ -54,7 +54,7 @@ jobs:
         pip install setuptools wheel twine
         curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
         source $HOME/.poetry/env
-        poetry export -f requirements.txt -o requirements.txt
+        poetry export -f requirements.txt -o requirements.txt --dev
         pip install -r requirements.txt
 
     - name: Start MySQL Server
