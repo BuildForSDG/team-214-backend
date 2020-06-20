@@ -7,7 +7,7 @@ from firebase_admin.exceptions import FirebaseError
 
 FIREBASE_WEB_API_KEY = os.environ.get("FIREBASE_WEB_API_KEY")
 
-rest_api_url = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword"
+rest_api_url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword"
 
 
 def login_with_email_and_password(data, return_secure_token: bool = True):
