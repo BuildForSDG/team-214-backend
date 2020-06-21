@@ -10,11 +10,14 @@ from ..models.document import Document
 tmpdir = tempfile.mkdtemp()
 # UPLOAD_FOLDER = "/tmp/upload"
 MAX_CONTENT_LENGTH = 5 * 1024 * 1024
-ALLOWED_EXTENSIONS = {"txt", "pdf", "png", "jpg", "jpeg", "gif"}
+ALLOWED_EXTENSIONS = set(["txt", "pdf", "png", "jpg", "jpeg", "gif"])
 
 
-def allowed_file(content_type):
-    return content_type.rsplit("/")[1].lower() in ALLOWED_EXTENSIONS
+def allowed_file(content_type, filename):
+    return (
+        content_type.rsplit("/")[1].lower() in ALLOWED_EXTENSIONS
+        and filename.rsplit(".")[1].lower() in ALLOWED_EXTENSIONS
+    )
 
 
 def update():
@@ -48,7 +51,7 @@ def check_file(filename, file_size, content_type):
         response_object["message"] = "File exceeds max upload size"
         return response_object, 413  # payload too large
 
-    if not allowed_file(content_type):
+    if not allowed_file(content_type, filename):
         response_object["message"] = "File extension not allowed"
         return response_object, 406  # not acceptable
 

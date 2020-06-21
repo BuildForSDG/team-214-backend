@@ -1,4 +1,4 @@
-name: Code Quality CI
+name: Pytest CI
 
 on:
   push:
@@ -15,7 +15,6 @@ on:
     - '.gitmodules'
     - '.gitattributes'
     - '.editorconfig'
-    # branches: [ master, develop ]
   pull_request:
     paths-ignore:
     - 'docs/**'
@@ -36,7 +35,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 4
       matrix:
         python-version: ['3.7', '3.8']
 
@@ -59,12 +57,14 @@ jobs:
         poetry export -f requirements.txt -o requirements.txt --dev
         pip install -r requirements.txt
 
-    - name: Check python imports with isort
-      run: |
-        isort --version-number
-        isort -rc --check-only --quiet .
+    - name: Start MySQL Server
+      run: sudo service mysql start
 
-    - name: Lint with flake8
+    - name: Create DB
+      run: mysql -uroot -proot -e "CREATE DATABASE smefinancing;"
+
+    - name: Run Tests
       run: |
-        flake8 --version
-        flake8
+        mv .env.testing .env
+        cat .env
+        pytest

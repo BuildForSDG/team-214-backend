@@ -34,7 +34,7 @@ class FundingProject(db.Model):
 
     funding_details = db.relationship("FundingDetail", backref="funding_project")
     fund_disbursements = db.relationship("FundDisbursement", backref="funding_project")
-    project_milestones = db.relationship("ProjectMilestone", backref="funding_project")
+    # project_milestones =db.relationship("ProjectMilestone",backref="funding_project")
 
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated = db.Column(db.DateTime, onupdate=datetime.utcnow)

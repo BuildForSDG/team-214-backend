@@ -16,10 +16,10 @@ class ProjectMilestone(db.Model):
     deadline = db.Column(db.DateTime, nullable=False)
 
     funding_project_id = db.Column(db.Integer, db.ForeignKey("funding_projects.id"))
-    # funding_project = db.relationship("FundingProject", backref="project_milestones")
+    funding_project = db.relationship("FundingProject", backref="project_milestones")
 
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
     def __repr__(self):
-        return f"<ProjectMilestone '{self.name} - {self.status}'>"
+        return f"<ProjectMilestone '{self.title} - {self.status}'>"

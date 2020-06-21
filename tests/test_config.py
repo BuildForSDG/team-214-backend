@@ -1,40 +1,21 @@
-import unittest
-
-from flask import current_app
-from flask_testing import TestCase
-
-from manage import app
+from sme_financing.main import create_app
 
 
-class TestDevelopmentConfig(TestCase):
-    def create_app(self):
-        app.config.from_object("sme_financing.main.config.DevelopmentConfig")
-        return app
-
-    def test_app_is_development(self):
-        self.assertTrue(app.config["DEBUG"] is True)
-        self.assertFalse(current_app is None)
-        self.assertIsNotNone(app.config["SQLALCHEMY_DATABASE_URI"])
+def test_app_is_development():
+    app = create_app(config_name="development")
+    assert app is not None
+    assert app.config["DEBUG"] is True
+    assert app.config["SQLALCHEMY_DATABASE_URI"] is not None
 
 
-class TestTestingConfig(TestCase):
-    def create_app(self):
-        app.config.from_object("sme_financing.main.config.TestingConfig")
-        return app
-
-    def test_app_is_testing(self):
-        self.assertTrue(app.config["DEBUG"])
+def test_app_is_testing():
+    app = create_app(config_name="testing")
+    assert app is not None
+    assert app.config["TESTING"] is True
 
 
-class TestProductionConfig(TestCase):
-    def create_app(self):
-        app.config.from_object("sme_financing.main.config.ProductionConfig")
-        return app
-
-    def test_app_is_production(self):
-        self.assertTrue(app.config["DEBUG"] is False)
-        self.assertIsNotNone(app.config["SQLALCHEMY_DATABASE_URI"])
-
-
-if __name__ == "__main__":
-    unittest.main()
+def test_app_is_production():
+    app = create_app(config_name="production")
+    assert app is not None
+    assert app.config["DEBUG"] is False
+    assert app.config["SQLALCHEMY_DATABASE_URI"] is not None

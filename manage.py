@@ -8,7 +8,6 @@ from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 
 from sme_financing.main import create_app, db
-from sme_financing.main.api_v1 import blueprint as api_v1
 from sme_financing.main.models import (
     client,
     document,
@@ -24,8 +23,6 @@ from sme_financing.main.models import (
 )
 
 app = create_app(os.getenv("FLASK_ENV") or "default")
-
-app.register_blueprint(api_v1)
 
 app.app_context().push()
 
